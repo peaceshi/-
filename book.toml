@@ -1,0 +1,17 @@
+[book]
+authors = ["PeaceShi"]
+language = "cmn-Hans"
+description = "游戏编程模式"
+multilingual = false
+src = "src"
+title = "游戏编程模式"
+[build]
+create-missing = true
+[output.html]
+theme = "src/theme"
+default-theme = "rust"
+additional-css = ["theme/theme.css"]
+[output.html.playpen]
+editable = false
+copy-js = true
+line-numbers = false
