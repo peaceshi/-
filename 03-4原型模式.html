@@ -1,0 +1,725 @@
+<!DOCTYPE HTML>
+<html lang="cmn-Hans" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>原型模式 - 游戏编程模式</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="游戏编程模式">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+        <link rel="stylesheet" href="theme/theme.css">
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "rust" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div id="sidebar-scrollbox" class="sidebar-scrollbox">
+                <ol class="chapter"><li class="expanded affix "><a href="00致谢.html">致谢</a></li><li class="expanded affix "><a href="01序.html">作者序</a></li><li class="expanded affix "><a href="01-1序2.html">序</a></li><li class="expanded affix "><a href="02架构，性能和游戏.html">架构，性能和游戏</a></li><li class="expanded "><a href="03重返设计模式.html"><strong aria-hidden="true">1.</strong> 重返设计模式</a></li><li><ol class="section"><li class="expanded "><a href="03-1命令模式.html"><strong aria-hidden="true">1.1.</strong> 命令模式</a></li><li class="expanded "><a href="03-2享元模式.html"><strong aria-hidden="true">1.2.</strong> 享元模式</a></li><li class="expanded "><a href="03-3观察者模式.html"><strong aria-hidden="true">1.3.</strong> 观察者模式</a></li><li class="expanded "><a href="03-4原型模式.html" class="active"><strong aria-hidden="true">1.4.</strong> 原型模式</a></li><li class="expanded "><a href="03-5单例模式.html"><strong aria-hidden="true">1.5.</strong> 单例模式</a></li><li class="expanded "><a href="03-6状态模式.html"><strong aria-hidden="true">1.6.</strong> 状态模式</a></li></ol></li><li class="expanded "><a href="04序列模式.html"><strong aria-hidden="true">2.</strong> 序列模式</a></li><li><ol class="section"><li class="expanded "><a href="04-1双缓冲模式.html"><strong aria-hidden="true">2.1.</strong> 双缓冲模式</a></li><li class="expanded "><a href="04-2游戏循环.html"><strong aria-hidden="true">2.2.</strong> 游戏循环</a></li><li class="expanded "><a href="04-3更新方法.html"><strong aria-hidden="true">2.3.</strong> 更新方法</a></li></ol></li><li class="expanded "><a href="05行为模式.html"><strong aria-hidden="true">3.</strong> 行为模式</a></li><li><ol class="section"><li class="expanded "><a href="05-1字节码.html"><strong aria-hidden="true">3.1.</strong> 字节码</a></li><li class="expanded "><a href="05-2子类沙箱.html"><strong aria-hidden="true">3.2.</strong> 子类沙箱</a></li><li class="expanded "><a href="05-3类型对象.html"><strong aria-hidden="true">3.3.</strong> 类型对象</a></li></ol></li><li class="expanded "><a href="06解耦模式.html"><strong aria-hidden="true">4.</strong> 解耦模式</a></li><li><ol class="section"><li class="expanded "><a href="06-1组件模式.html"><strong aria-hidden="true">4.1.</strong> 组件模式</a></li><li class="expanded "><a href="06-2事件队列.html"><strong aria-hidden="true">4.2.</strong> 事件队列</a></li><li class="expanded "><a href="06-3服务定位器.html"><strong aria-hidden="true">4.3.</strong> 服务定位器</a></li></ol></li><li class="expanded "><a href="07优化模式.html"><strong aria-hidden="true">5.</strong> 优化模式</a></li><li><ol class="section"><li class="expanded "><a href="07-1数据局部性.html"><strong aria-hidden="true">5.1.</strong> 数据局部性</a></li><li class="expanded "><a href="07-2脏标识模式.html"><strong aria-hidden="true">5.2.</strong> 脏标识模式</a></li><li class="expanded "><a href="07-3对象池模式.html"><strong aria-hidden="true">5.3.</strong> 对象池模式</a></li><li class="expanded "><a href="07-3空间分区.html"><strong aria-hidden="true">5.4.</strong> 空间分区</a></li></ol></li><li class="expanded "><a href="附录一.html">附录一</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">游戏编程模式</h1>
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#原型模式" id="原型模式">原型模式</a></h1>
+<p>我第一次听到“原型”这个词是在<strong>设计模式</strong>中。
+如今，似乎每个人都在用这个词，但他们讨论的实际上不是<a href="http://en.wikipedia.org/wiki/Prototype_pattern">设计模式</a>。
+我们会讨论他们所说的原型，也会讨论术语“原型”的有趣之处，和其背后的理念。
+但首先，让我们重访传统的设计模式。</p>
+<blockquote>
+<p>“传统的”一词可不是随便用的。</p>
+<p><strong>设计模式</strong>引自<strong>1963 年</strong> Ivan Sutherland 的<a href="http://en.wikipedia.org/wiki/Sketchpad">Sketchpad</a>传奇项目，那是这个模式首次出现。
+当其他人在听迪伦和甲壳虫乐队时，Sutherland 正忙于，你知道的，发明 CAD，交互图形和面向对象编程的基本概念。</p>
+<p>看看这个<a href="http://www.youtube.com/watch?v=USyoT_Ha_bA">demo</a>，跪服吧。</p>
+</blockquote>
+<h2><a class="header" href="#原型设计模式" id="原型设计模式">原型设计模式</a></h2>
+<p>假设我们要用《圣铠传说》的风格做款游戏。
+野兽和恶魔围绕着英雄，争着要吃他的血肉。
+这些可怖的同行者通过“生产者”进入这片区域，每种敌人有不同的生产者。</p>
+<p>在这个例子中，假设我们游戏中每种怪物都有不同的类——<code>Ghost</code>，<code>Demon</code>，<code>Sorcerer</code>等等，像这样：</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>class Monster
+{
+  // 代码……
+};
+
+class Ghost : public Monster {};
+class Demon : public Monster {};
+class Sorcerer : public Monster {};
+<span class="boring">}
+</span></code></pre></pre>
+<p>生产者构造特定种类怪物的实例。
+为了在游戏中支持每种怪物，我们<strong>可以</strong>用一种暴力的实现方法，
+让每个怪物类都有生产者类，得到平行的类结构：</p>
+<p><img src="https://gpp.tkchu.me/images/prototype-hierarchies.png" alt="平行的类结构，恶灵，恶魔，巫师都继承怪物。恶灵生产者。恶魔生产者，巫师生产者都继承生产者。" /></p>
+<blockquote>
+<p>我得翻出落满灰尘的 UML 书来画这个图表。</p>
+</blockquote>
+<p><img src="https://gpp.tkchu.me/images/arrow-inherits.png" alt="一个UML箭头" />代表“继承”。</p>
+<p>实现后看起来像是这样：</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>class Spawner
+{
+public:
+  virtual ~Spawner() {}
+  virtual Monster* spawnMonster() = 0;
+};
+
+class GhostSpawner : public Spawner
+{
+public:
+  virtual Monster* spawnMonster()
+  {
+    return new Ghost();
+  }
+};
+
+class DemonSpawner : public Spawner
+{
+public:
+  virtual Monster* spawnMonster()
+  {
+    return new Demon();
+  }
+};
+
+// 你知道思路了……
+<span class="boring">}
+</span></code></pre></pre>
+<p>除非你会根据代码量来获得工资，
+否则将这些焊在一起很明显不是好方法。
+众多类，众多引用，众多冗余，众多副本，众多重复自我……</p>
+<p>原型模式提供了一个解决方案。
+关键思路是<strong>一个对象可以产出与它自己相近的对象。</strong>
+如果你有一个恶灵，你可以制造更多恶灵。
+如果你有一个恶魔，你可以制造其他恶魔。
+任何怪物都可以被视为<strong>原型</strong>怪物，产出其他版本的自己。</p>
+<p>为了实现这个功能，我们给基类<code>Monster</code>添加一个抽象方法<code>clone()</code>：</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>class Monster
+{
+public:
+  virtual ~Monster() {}
+  virtual Monster* clone() = 0;
+
+  // 其他代码……
+};
+<span class="boring">}
+</span></code></pre></pre>
+<p>每个怪兽子类提供一个特定实现，返回与它自己的类和状态都完全一样的新对象。举个例子：</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>class Ghost : public Monster {
+public:
+  Ghost(int health, int speed)
+  : health_(health),
+    speed_(speed)
+  {}
+
+  virtual Monster* clone()
+  {
+    return new Ghost(health_, speed_);
+  }
+
+private:
+  int health_;
+  int speed_;
+};
+<span class="boring">}
+</span></code></pre></pre>
+<p>一旦我们所有的怪物都支持这个，
+我们不再需要为每个怪物类创建生产者类。我们只需定义一个类：</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>class Spawner
+{
+public:
+  Spawner(Monster* prototype)
+  : prototype_(prototype)
+  {}
+
+  Monster* spawnMonster()
+  {
+    return prototype_-&gt;clone();
+  }
+
+private:
+  Monster* prototype_;
+};
+<span class="boring">}
+</span></code></pre></pre>
+<p>它内部存有一个怪物，一个隐藏的怪物，
+它唯一的任务就是被生产者当做模板，去产生更多一样的怪物，
+有点像一个从来不离开巢穴的蜂后。</p>
+<p><img src="https://gpp.tkchu.me/images/prototype-spawner.png" alt="一个生产者包含一个对怪物应用的原型字段。他调用原型的clone()方法来产生新的怪物。" /></p>
+<p>为了得到恶灵生产者，我们创建一个恶灵的原型实例，然后创建拥有这个实例的生产者：</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>Monster* ghostPrototype = new Ghost(15, 3);
+Spawner* ghostSpawner = new Spawner(ghostPrototype);
+<span class="boring">}
+</span></code></pre></pre>
+<p>这个模式的灵巧之处在于它不但拷贝原型的<strong>类</strong>，也拷贝它的<strong>状态</strong>。
+这就意味着我们可以创建一个生产者，生产快速鬼魂，虚弱鬼魂，慢速鬼魂，而只需创建一个合适的原型鬼魂。</p>
+<p>我在这个模式中找到了一些既优雅又令人惊叹的东西。
+我无法想象自己是如何创造出它们的，但我更无法想象<strong>不知道</strong>这些东西的自己该如何是好。</p>
+<h3><a class="header" href="#效果如何" id="效果如何">效果如何</a></h3>
+<p>好吧，我们不需要为每个怪物创建单独的生产者类，那很好。
+但我们<strong>确实</strong>需要在每个怪物类中实现<code>clone()</code>。
+这和使用生产者方法比起来也没节约多少代码量。</p>
+<p>当你坐下来试着写一个正确的<code>clone()</code>，会遇见令人不快的语义漏洞。
+做深层拷贝还是浅层拷贝呢？换言之，如果恶魔拿着叉子，克隆恶魔也要克隆叉子吗？</p>
+<p>同时，这看上去没减少已存问题上的代码，
+事实上还增添了些<strong>人为的问题</strong>。
+我们需要将每个怪物有独立的类作为前提条件。
+这绝对<strong>不是</strong>当今大多数游戏引擎运作的方法。</p>
+<p>我们中大部分痛苦地学到，这样庞杂的类层次管理起来很痛苦，
+那就是我们为什么用<a href="06-1%E7%BB%84%E4%BB%B6%E6%A8%A1%E5%BC%8F.html">组件模式</a>和<a href="05-3%E7%B1%BB%E5%9E%8B%E5%AF%B9%E8%B1%A1.html">类型对象</a>为不同的实体建模，这样无需一一建构自己的类。</p>
+<h3><a class="header" href="#生产函数" id="生产函数">生产函数</a></h3>
+<p>哪怕我们确实需要为每个怪物构建不同的类，这里还有其他的实现方法。
+不是使用为每个怪物建立分离的生产者<strong>类</strong>，我们可以创建生产<strong>函数</strong>，就像这样：</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>Monster* spawnGhost()
+{
+  return new Ghost();
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>这比构建怪兽生产者类更简洁。生产者类只需简单地存储一个函数指针：</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>typedef Monster* (*SpawnCallback)();
+
+class Spawner
+{
+public:
+  Spawner(SpawnCallback spawn)
+  : spawn_(spawn)
+  {}
+
+  Monster* spawnMonster()
+  {
+    return spawn_();
+  }
+
+private:
+  SpawnCallback spawn_;
+};
+<span class="boring">}
+</span></code></pre></pre>
+<p>为了给恶灵构建生产者，你需要做：</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>Spawner* ghostSpawner = new Spawner(spawnGhost);
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#模板" id="模板">模板</a></h3>
+<p>如今，大多数 C++开发者已然熟悉模板了。
+生产者类需要为某类怪物构建实例，但是我们不想硬编码是哪类怪物。
+自然的解决方案是将它作为模板中的<strong>类型参数</strong>：</p>
+<blockquote>
+<p>我不太确定程序员是学着喜欢 C++模板还是完全畏惧并远离了 C++。
+不管怎样，今日我见到的程序员中，使用 C++的也都会使用模板。</p>
+<p>这里的<code>Spawner</code>类不必考虑将生产什么样的怪物，
+它总与指向<code>Monster</code>的指针打交道。</p>
+<p>如果我们只有<code>SpawnerFor&lt;T&gt;</code>类，模板类型没有办法共享父模板，
+这样的话，如果一段代码需要与产生多种怪物类型的生产者打交道，就都得接受模板参数。</p>
+</blockquote>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>class Spawner
+{
+public:
+  virtual ~Spawner() {}
+  virtual Monster* spawnMonster() = 0;
+};
+
+template &lt;class T&gt;
+class SpawnerFor : public Spawner
+{
+public:
+  virtual Monster* spawnMonster() { return new T(); }
+};
+<span class="boring">}
+</span></code></pre></pre>
+<p>像这样使用它：</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>Spawner* ghostSpawner = new SpawnerFor&lt;Ghost&gt;();
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#第一公民类型" id="第一公民类型">第一公民类型</a></h3>
+<p>前面的两个解决方案使用类完成了需求，<code>Spawner</code>使用类型进行参数化。
+在 C++中，类型不是第一公民，所以需要一些改动。
+如果你使用 JavaScript，Python，或者 Ruby 这样的动态类型语言，
+它们的类<strong>是</strong>可以传递的对象，你可以用更直接的办法解决这个问题。</p>
+<blockquote>
+<p>某种程度上，<a href="05-3%E7%B1%BB%E5%9E%8B%E5%AF%B9%E8%B1%A1.html">类型对象</a>也是为了弥补第一公民类型的缺失。
+但那个模式在拥有第一公民类型的语言中也有用，因为它让<strong>你</strong>决定什么是“类型”。
+你也许想要与语言内建的类不同的语义。</p>
+</blockquote>
+<p>当你完成一个生产者，直接向它传递要构建的怪物类——那个代表了怪物类的运行时对象。超容易的，对吧。</p>
+<p>综上所述，老实说，我不能说找到了一种情景，而在这个情景下，原型<strong>设计模式</strong>是最好的方案。
+也许你的体验有所不同，但现在把它搁到一边，我们讨论点别的：将原型作为一种<strong>语言范式</strong>。</p>
+<h2><a class="header" href="#原型语言范式" id="原型语言范式">原型语言范式</a></h2>
+<p>很多人认为“面向对象编程”和“类”是同义词。
+OOP 的定义却让人感觉正好相反，
+毫无疑问，<em>OOP 让你定义“对象”，将数据和代码绑定在一起。</em>
+与 C 这样的结构化语言相比，与 Scheme 这样的函数语言相比，
+OOP 的特性是它将状态和行为紧紧地绑在一起。</p>
+<p>你也许认为类是完成这个的唯一方式方法，
+但是包括 Dave Ungar 和 Randall Smith 的一大堆家伙一直在拼命区分 OOP 和类。
+他们在 80 年代创建了一种叫做 Self 的语言。它不用类实现了 OOP。</p>
+<h3><a class="header" href="#self-语言" id="self-语言">Self 语言</a></h3>
+<p>就单纯意义而言，Self 比基于类的语言<strong>更加</strong>面向对象。
+我们认为 OOP 将状态和行为绑在一起，但是基于类的语言实际将状态和行为割裂开来。</p>
+<p>拿你最喜欢的基于类的语言的语法来说。
+为了接触对象中的一些状态，你需要在实例的内存中查询。状态<strong>包含</strong>在实例中。</p>
+<p>但是，为了调用方法，你需要找到实例的类，
+然后在<strong>那里</strong>调用方法。行为包含在<strong>类</strong>中。
+获得方法总需要通过中间层，这意味着字段和方法是不同的。</p>
+<p><img src="https://gpp.tkchu.me/images/prototype-class.png" alt="一个类，包含了一系列方法。一个实例，包含了一系列字段和指向类的指针。" /></p>
+<blockquote>
+<p>举个例子，为了调用 C++中的虚方法，你需要在实例中找指向虚方法表的指针，然后再在那里找方法。</p>
+</blockquote>
+<p>Self 结束了这种分歧。<em>无论你要找啥</em>，都只需在对象中找。
+实例同时包含状态和行为。你可以构建拥有完全独特方法的对象。</p>
+<p><img src="https://gpp.tkchu.me/images/prototype-object.png" alt="一个对象中同时包含了字段和方法。" /></p>
+<blockquote>
+<p>没有人能与世隔绝，但这个对象是。</p>
+</blockquote>
+<p>如果这就是 Self 语言的全部，那它将很难使用。
+基于类的语言中的继承，不管有多少缺陷，总归提供了有用的机制来重用代码，避免重复。
+为了不使用类而实现一些类似的功能，Self 语言加入了<strong>委托（delegation）</strong>。</p>
+<p>如果要在对象中寻找字段或者调用方法，首先在对象内部查找。
+如果能找到，那就成了。如果找不到，在对象的<strong>父对象</strong>中寻找。
+这里的父类仅仅是一个对其他对象的引用。
+当我们没能在第一个对象中找到属性，我们尝试它的父对象，然后父类的父对象，继续下去直到找到或者没有父对象为止。
+换言之，失败的查找被<strong>委托</strong>给对象的父对象。</p>
+<blockquote>
+<p>我在这里简化了。Self 实际上支持多个父对象。
+父对象只是特别标明的字段，意味着你可以继承它们或者在运行时改变他们，
+你最终得到了“动态继承”。</p>
+</blockquote>
+<p><img src="https://gpp.tkchu.me/images/prototype-delegate.png" alt="一个对象包含了字段和方法，以及一个指向委托对象的指针。" /></p>
+<p>父对象让我们在不同对象间重用行为（还有状态！），这样就完成了类的公用功能。
+类做的另一个关键事情就是给出了创建实例的方法。
+当你需要新的某物，你可以直接<code>new Thingamabob()</code>，或者随便什么你喜欢的表达法。
+类是实例的生产工厂。</p>
+<p>不用类，我们怎样创建新的实例？
+特别地，我们如何创建一堆有共同点的新东西？
+就像这个设计模式，在 Self 中，达到这点的方式是使用<strong>克隆</strong>。</p>
+<p>在 Self 语言中，就好像<strong>每个</strong>对象都自动支持原型设计模式。
+任何对象都能被克隆。为了获得一堆相似的对象，你：</p>
+<ol>
+<li>将对象塑造成你想要的状态。你可以直接克隆系统内建的基本<code>Object</code>，然后向其中添加字段和方法。</li>
+<li>克隆它来产出……额……随你想要多少就克隆多少个对象。</li>
+</ol>
+<p>无需烦扰自己实现<code>clone()</code>；我们就实现了优雅的原型模式，原型被内建在系统中。</p>
+<p>这个系统美妙，灵巧，而且小巧，
+一听说它，我就开始创建一个基于原型的语言来进一步学习。</p>
+<blockquote>
+<p>我知道从头开始构建一种编程语言语言不是学习它最有效率的办法，但我能说什么呢？我可算是个怪人。
+如果你很好奇，我构建的语言叫<a href="http://finch.stuffwithstuff.com/">Finch</a>.</p>
+</blockquote>
+<h3><a class="header" href="#它的实际效果如何" id="它的实际效果如何">它的实际效果如何</a></h3>
+<p>能使用纯粹基于原型的语言让我很兴奋，但是当我真正上手时，
+我发现了一个令人不快的事实：用它编程没那么有趣。</p>
+<blockquote>
+<p>从小道消息中，我听说很多 Self 程序员得出了相同的结论。
+但这项目并不是一无是处。
+Self 非常的灵活，为此创造了很多虚拟机的机制来保持高速运行。</p>
+<p>他们发明了 JIT 编译，垃圾回收，以及优化方法分配——这都是由同一批人实现的——
+这些新玩意让动态类型语言能快速运行，构建了很多大受欢迎的应用。</p>
+</blockquote>
+<p>是的，语言本身很容易实现，那是因为它把复杂度甩给了用户。
+一旦开始试着使用这语言，我发现我想念基于类语言中的层次结构。
+最终，在构建语言缺失的库概念时，我放弃了。</p>
+<p>鉴于我之前的经验都来自基于类的语言，因此我的头脑可能已经固定在它的范式上了。
+但是直觉上，我认为大部分人还是喜欢有清晰定义的“事物”。</p>
+<p>除去基于类的语言自身的成功以外，看看有多少游戏用类建模描述玩家角色，以及不同的敌人、物品、技能。
+不是游戏中的每个怪物都与众不同，你不会看到“洞穴人和哥布林还有雪混合在一起”这样的怪物。</p>
+<p>原型是非常酷的范式，我希望有更多人了解它，
+但我很庆幸不必天天用它编程。
+完全皈依原型的代码是一团浆糊，难以阅读和使用。</p>
+<blockquote>
+<p>这同时证明，<em>很少</em> 有人使用原型风格的代码。我查过了。</p>
+</blockquote>
+<h3><a class="header" href="#javascript-又怎么样呢" id="javascript-又怎么样呢">JavaScript 又怎么样呢？</a></h3>
+<p>好吧，如果基于原型的语言不那么友好，怎么解释 JavaScript 呢？
+这是一个有原型的语言，每天被数百万人使用。运行 JavaScript 的机器数量超过了地球上其他所有的语言。</p>
+<p>Brendan Eich，JavaScript 的缔造者，从 Self 语言中直接汲取灵感，很多 JavaScript 的语义都是基于原型的。
+每个对象都有属性的集合，包含字段和“方法”（事实上只是存储为字段的函数）。
+A 对象可以拥有 B 对象，B 对象被称为 A 对象的“原型”，
+如果 A 对象的字段获取失败就会委托给 B 对象。</p>
+<blockquote>
+<p>作为语言设计者，原型的诱人之处是它们比类更易于实现。
+Eich 充分利用了这一点，他在十天内创建了 JavaScript 的第一个版本。</p>
+</blockquote>
+<p>但除那以外，我相信在实践中，JavaScript 更像是基于类的而不是基于原型的语言。
+JavaScript 与 Self 有所偏离，其中一个要点是除去了基于原型语言的核心操作“克隆”。</p>
+<p>在 JavaScript 中没有方法来克隆一个对象。
+最接近的方法是<code>Object.create()</code>，允许你创建新对象作为现有对象的委托。
+这个方法在 ECMAScript5 中才添加，而那已是 JavaScript 出现后的第十四年了。
+相对于克隆，让我带你参观一下 JavaScript 中定义类和创建对象的经典方法。
+我们从<strong>构造器函数</strong>开始：</p>
+<pre><code class="language-javascript">function Weapon(range, damage) {
+  this.range = range;
+  this.damage = damage;
+}
+</code></pre>
+<p>这创建了一个新对象，初始化了它的字段。你像这样引入它：</p>
+<pre><code class="language-javascript">var sword = new Weapon(10, 16);
+</code></pre>
+<p>这里的<code>new</code>调用<code>Weapon()</code>函数，而<code>this</code>绑定在新的空对象上。
+函数为新对象添加了一系列字段，然后返回填满的对象。</p>
+<p><code>new</code>也为你做了另外一件事。
+当它创建那个新的空对象时，它将空对象的委托和一个原型对象连接起来。
+你可以用<code>Weapon.prototype</code>来获得原型对象。</p>
+<p>属性是添加到构造器中的，而定义<strong>行为</strong>通常是通过向原型对象添加方法。就像这样：</p>
+<pre><code class="language-javascript">Weapon.prototype.attack = function(target) {
+  if (distanceTo(target) &gt; this.range) {
+    console.log(&quot;Out of range!&quot;);
+  } else {
+    target.health -= this.damage;
+  }
+};
+</code></pre>
+<p>这给武器原型添加了<code>attack</code>属性，其值是一个函数。
+由于<code>new Weapon()</code>返回的每一个对象都有给<code>Weapon.prototype</code>的委托，
+你现在可以通过调用<code>sword.attack()</code> 来调用那个函数。
+看上去像是这样：</p>
+<p><img src="https://gpp.tkchu.me/images/prototype-weapon.png" alt="一个武器原型包含一个 attack() 方法和其他方法。一个宝剑对象包含一个指向武器的委托和其他字段。" /></p>
+<p>让我们复习一下：</p>
+<ul>
+<li>通过“new”操作创建对象，该操作引入代表类型的对象——构造器函数。</li>
+<li>状态存储在实例中。</li>
+<li>行为通过间接层——原型的委托——被存储在独立的对象中，代表了一系列特定类型对象的共享方法。</li>
+</ul>
+<p>说我疯了吧，但这听起来很像是我之前描述的类。
+你<strong>可以</strong>在 JavaScript 中写原型风格的代码（<em>不用</em> 克隆），
+但是语言的语法和惯用法更鼓励基于类的实现。</p>
+<p>个人而言，我认为这是好事。
+就像我说的，我发现如果一切都使用原型，就很难编写代码，
+所以我喜欢 JavaScript，它将整个核心语义包上了一层糖衣。</p>
+<h2><a class="header" href="#为数据模型构建原型" id="为数据模型构建原型">为数据模型构建原型</a></h2>
+<p>好吧，我之前不断地讨论我<strong>不喜欢</strong>原型的原因，这让这一章读起来令人沮丧。
+我认为这本书应该更欢乐些，所以在最后，让我们讨论讨论原型<strong>确实</strong>有用，或者更加精确，<em>委托</em> 有用的地方。</p>
+<p>随着编程的进行，如果你比较程序与数据的字节数，
+那么你会发现数据的占比稳定地增长。
+早期的游戏在程序中生成几乎所有东西，这样程序可以塞进磁盘和老式游戏卡带。
+在今日的游戏中，代码只是驱动游戏的“引擎”，游戏是完全由数据定义的。</p>
+<p>这很好，但是将内容推到数据文件中并不能魔术般地解决组织大项目的挑战。
+它只能把这挑战变得更难。
+我们使用编程语言就因为它们有办法管理复杂性。</p>
+<p>不再是将一堆代码拷来拷去，我们将其移入函数中，通过名字调用。
+不再是在一堆类之间复制方法，我们将其放入单独的类中，让其他类可以继承或者组合。</p>
+<p>当游戏数据达到一定规模时，你真的需要考虑一些相似的方案。
+我不指望在这里能说清数据模式这个问题，
+但我确实希望提出个思路，让你在游戏中考虑考虑：使用原型和委托来重用数据。</p>
+<p>假设我们为早先提到的山寨版《圣铠传说》定义数据模型。
+游戏设计者需要在很多文件中设定怪物和物品的属性。</p>
+<blockquote>
+<p>这标题是我原创的，没有受到任何已存的多人地下城游戏的影响。<br />
+请不要起诉我。</p>
+</blockquote>
+<p>一个常用的方法是使用 JSON。
+数据实体一般是<strong>字典</strong>，或者<strong>属性集合</strong>，或者其他什么术语，
+因为程序员就喜欢为旧事物发明新名字。</p>
+<blockquote>
+<p>我们重新发明了太多次，Steve Yegge 称之为<a href="http://steve-yegge.blogspot.com/2008/10/universal-design-pattern.html">&quot;通用设计模式&quot;</a>.</p>
+</blockquote>
+<p>所以游戏中的哥布林也许被定义为像这样的东西：</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;goblin grunt&quot;,
+  &quot;minHealth&quot;: 20,
+  &quot;maxHealth&quot;: 30,
+  &quot;resists&quot;: [&quot;cold&quot;, &quot;poison&quot;],
+  &quot;weaknesses&quot;: [&quot;fire&quot;, &quot;light&quot;]
+}
+</code></pre>
+<p>这看上去很易懂，哪怕是最讨厌文本的设计者也能使用它。
+所以，你可以给哥布林大家族添加几个兄弟分支：</p>
+<pre><code class="language-json">    {
+      &quot;name&quot;: &quot;goblin wizard&quot;,
+      &quot;minHealth&quot;: 20,
+      &quot;maxHealth&quot;: 30,
+      &quot;resists&quot;: [&quot;cold&quot;, &quot;poison&quot;],
+      &quot;weaknesses&quot;: [&quot;fire&quot;, &quot;light&quot;],
+      &quot;spells&quot;: [&quot;fire ball&quot;, &quot;lightning bolt&quot;]
+    }
+
+    {
+      &quot;name&quot;: &quot;goblin archer&quot;,
+      &quot;minHealth&quot;: 20,
+      &quot;maxHealth&quot;: 30,
+      &quot;resists&quot;: [&quot;cold&quot;, &quot;poison&quot;],
+      &quot;weaknesses&quot;: [&quot;fire&quot;, &quot;light&quot;],
+      &quot;attacks&quot;: [&quot;short bow&quot;]
+    }
+</code></pre>
+<p>现在，如果这是代码，我们会闻到了臭味。
+在实体间有很多的重复，训练优良的程序员<strong>讨厌</strong>重复。
+它浪费了空间，消耗了作者更多时间。
+你需要仔细阅读代码才知道这些数据<strong>是不是</strong>相同的。
+这难以维护。
+如果我们决定让所有哥布林变强，需要记得将三个哥布林都更新一遍。糟糕糟糕糟糕。</p>
+<p>如果这是代码，我们会为“哥布林”构建抽象，并在三个哥布林类型中重用。
+但是无能的 JSON 没法这么做。所以让我们把它做得更加巧妙些。</p>
+<p>我们可以为对象添加<code>&quot;prototype&quot;</code>字段，记录委托对象的名字。
+如果在此对象内没找到一个字段，那就去委托对象中查找。</p>
+<blockquote>
+<p>这让<code>&quot;prototype&quot;</code>不再是数据，而成为了<strong>元</strong>数据。
+哥布林有绿色疣皮和黄色牙齿。它们没有原型。
+原型是<strong>表示哥布林的数据模型</strong>的属性，而不是哥布林本身的属性。</p>
+</blockquote>
+<p>这样，我们可以简化我们的哥布林 JSON 内容：</p>
+<pre><code class="language-json">    {
+      &quot;name&quot;: &quot;goblin grunt&quot;,
+      &quot;minHealth&quot;: 20,
+      &quot;maxHealth&quot;: 30,
+      &quot;resists&quot;: [&quot;cold&quot;, &quot;poison&quot;],
+      &quot;weaknesses&quot;: [&quot;fire&quot;, &quot;light&quot;]
+    }
+
+    {
+      &quot;name&quot;: &quot;goblin wizard&quot;,
+      &quot;prototype&quot;: &quot;goblin grunt&quot;,
+      &quot;spells&quot;: [&quot;fire ball&quot;, &quot;lightning bolt&quot;]
+    }
+
+    {
+      &quot;name&quot;: &quot;goblin archer&quot;,
+      &quot;prototype&quot;: &quot;goblin grunt&quot;,
+      &quot;attacks&quot;: [&quot;short bow&quot;]
+    }
+</code></pre>
+<p>由于弓箭手和术士都将 grunt 作为原型，我们就不需要在它们中重复血量，防御和弱点。
+我们为数据模型增加的逻辑超级简单——基本的单一委托——但已经成功摆脱了一堆冗余。</p>
+<p>有趣的事情是，我们没有更进一步，把哥布林委托的<strong>抽象</strong>原型设置成“基本哥布林”。
+相反，我们选择了最简单的哥布林，然后委托给它。</p>
+<p>在基于原型的系统中，对象可以克隆产生新对象是很自然的，
+我认为在这里也一样自然。这特别适合记录那些只有一处不同的实体的数据。</p>
+<p>想想 Boss 和其他独特的事物，它们通常是更加常见事物的重新定义，
+原型委托是定义它们的好方法。
+断头魔剑，就是一把拥有加成的长剑，可以像下面这样表示：</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;Sword of Head-Detaching&quot;,
+  &quot;prototype&quot;: &quot;longsword&quot;,
+  &quot;damageBonus&quot;: &quot;20&quot;
+}
+</code></pre>
+<p>只需在游戏引擎上多花点时间，你就能让设计者更加方便地添加不同的武器和怪物，而增加的这些丰富度能够取悦玩家。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="03-3观察者模式.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="03-5单例模式.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="03-3观察者模式.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="03-5单例模式.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

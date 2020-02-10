@@ -1,0 +1,15 @@
+html {
+    font-family: "sarasa mono sc";
+    color: var(--fg);
+    background-color: var(--bg);
+    text-size-adjust: none;
+}
+:not(pre) > .hljs {
+	padding-block-start: 0em;
+	padding-block-end: 0em;
+	font-family: "sarasa mono sc";
+	font-size: 1em;
+}
+code {
+    font-size: 1em;
+}

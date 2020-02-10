@@ -1,0 +1,590 @@
+<!DOCTYPE HTML>
+<html lang="cmn-Hans" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>享元模式 - 游戏编程模式</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="游戏编程模式">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+        <link rel="stylesheet" href="theme/theme.css">
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "rust" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div id="sidebar-scrollbox" class="sidebar-scrollbox">
+                <ol class="chapter"><li class="expanded affix "><a href="00致谢.html">致谢</a></li><li class="expanded affix "><a href="01序.html">作者序</a></li><li class="expanded affix "><a href="01-1序2.html">序</a></li><li class="expanded affix "><a href="02架构，性能和游戏.html">架构，性能和游戏</a></li><li class="expanded "><a href="03重返设计模式.html"><strong aria-hidden="true">1.</strong> 重返设计模式</a></li><li><ol class="section"><li class="expanded "><a href="03-1命令模式.html"><strong aria-hidden="true">1.1.</strong> 命令模式</a></li><li class="expanded "><a href="03-2享元模式.html" class="active"><strong aria-hidden="true">1.2.</strong> 享元模式</a></li><li class="expanded "><a href="03-3观察者模式.html"><strong aria-hidden="true">1.3.</strong> 观察者模式</a></li><li class="expanded "><a href="03-4原型模式.html"><strong aria-hidden="true">1.4.</strong> 原型模式</a></li><li class="expanded "><a href="03-5单例模式.html"><strong aria-hidden="true">1.5.</strong> 单例模式</a></li><li class="expanded "><a href="03-6状态模式.html"><strong aria-hidden="true">1.6.</strong> 状态模式</a></li></ol></li><li class="expanded "><a href="04序列模式.html"><strong aria-hidden="true">2.</strong> 序列模式</a></li><li><ol class="section"><li class="expanded "><a href="04-1双缓冲模式.html"><strong aria-hidden="true">2.1.</strong> 双缓冲模式</a></li><li class="expanded "><a href="04-2游戏循环.html"><strong aria-hidden="true">2.2.</strong> 游戏循环</a></li><li class="expanded "><a href="04-3更新方法.html"><strong aria-hidden="true">2.3.</strong> 更新方法</a></li></ol></li><li class="expanded "><a href="05行为模式.html"><strong aria-hidden="true">3.</strong> 行为模式</a></li><li><ol class="section"><li class="expanded "><a href="05-1字节码.html"><strong aria-hidden="true">3.1.</strong> 字节码</a></li><li class="expanded "><a href="05-2子类沙箱.html"><strong aria-hidden="true">3.2.</strong> 子类沙箱</a></li><li class="expanded "><a href="05-3类型对象.html"><strong aria-hidden="true">3.3.</strong> 类型对象</a></li></ol></li><li class="expanded "><a href="06解耦模式.html"><strong aria-hidden="true">4.</strong> 解耦模式</a></li><li><ol class="section"><li class="expanded "><a href="06-1组件模式.html"><strong aria-hidden="true">4.1.</strong> 组件模式</a></li><li class="expanded "><a href="06-2事件队列.html"><strong aria-hidden="true">4.2.</strong> 事件队列</a></li><li class="expanded "><a href="06-3服务定位器.html"><strong aria-hidden="true">4.3.</strong> 服务定位器</a></li></ol></li><li class="expanded "><a href="07优化模式.html"><strong aria-hidden="true">5.</strong> 优化模式</a></li><li><ol class="section"><li class="expanded "><a href="07-1数据局部性.html"><strong aria-hidden="true">5.1.</strong> 数据局部性</a></li><li class="expanded "><a href="07-2脏标识模式.html"><strong aria-hidden="true">5.2.</strong> 脏标识模式</a></li><li class="expanded "><a href="07-3对象池模式.html"><strong aria-hidden="true">5.3.</strong> 对象池模式</a></li><li class="expanded "><a href="07-3空间分区.html"><strong aria-hidden="true">5.4.</strong> 空间分区</a></li></ol></li><li class="expanded "><a href="附录一.html">附录一</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">游戏编程模式</h1>
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#享元模式" id="享元模式">享元模式</a></h1>
+<p>迷雾散尽，露出了古朴庄严的森林。古老的铁杉，在头顶编成绿色穹顶。
+阳光在树叶间破碎成金色顶棚。从树干间远眺，远处的森林渐渐隐去。</p>
+<p>这是我们游戏开发者梦想的超凡场景，这样的场景通常由一个模式支撑着，它的名字低调至极：享元模式。</p>
+<h2><a class="header" href="#森林" id="森林">森林</a></h2>
+<p>用几句话就能描述一片巨大的森林，但是在实时游戏中做这件事就完全是另外一件事了。
+当屏幕上需要显示一整个森林时，图形程序员看到的是每秒需要送到 GPU 六十次的百万多边形。</p>
+<p>我们讨论的是成千上万的树，每棵都由上千的多边形组成。
+就算有足够的<strong>内存</strong>描述森林，渲染的过程中，CPU 到 GPU 的部分也太过繁忙了。</p>
+<p>每棵树都有一系列与之相关的位：</p>
+<ul>
+<li>定义树干，树枝和树叶形状的多边形网格。</li>
+<li>树皮和树叶的纹理。</li>
+<li>在森林中树的位置和朝向。</li>
+<li>大小和色彩之类的调节参数，让每棵树都看起来与众不同。</li>
+</ul>
+<p>如果用代码表示，那么会得到这样的东西：</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>class Tree
+{
+private:
+  Mesh mesh_;
+  Texture bark_;
+  Texture leaves_;
+  Vector position_;
+  double height_;
+  double thickness_;
+  Color barkTint_;
+  Color leafTint_;
+};
+<span class="boring">}
+</span></code></pre></pre>
+<p>这是一大堆数据，多边形网格和纹理体积非常大。
+描述整个森林的对象在一帧的时间就交给 GPU 实在是太过了。
+幸运的是，有一种老办法来处理它。</p>
+<p>关键点在于，哪怕森林里有千千万万的树，它们大多数长得一模一样。
+它们使用了相同的网格和纹理。
+这意味着这些树的实例的大部分字段是<strong>一样的</strong>。</p>
+<blockquote>
+<p>你要么是疯了，要么是亿万富翁，才能让美术给森林里每棵树建立独立模型。</p>
+</blockquote>
+<p><img src="https://gpp.tkchu.me/images/flyweight-trees.png" alt="一行树，每棵都有自己的网格、纹理、树叶，调节参数和位置朝向。" /></p>
+<blockquote>
+<p>注意每一棵树的小盒子中的东西都是一样的。</p>
+</blockquote>
+<p>我们可以通过显式地将对象切为两部分来更加明确地模拟。
+第一，将树共有的数据拿出来分离到另一个类中：</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>class TreeModel
+{
+private:
+  Mesh mesh_;
+  Texture bark_;
+  Texture leaves_;
+};
+<span class="boring">}
+</span></code></pre></pre>
+<p>游戏只需要一个这种类，
+因为没有必要在内存中把相同的网格和纹理重复一千遍。
+游戏世界中每个树的实例只需有一个对这个共享<code>TreeModel</code>的<strong>引用</strong>。
+留在<code>Tree</code>中的是那些实例相关的数据：</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>class Tree
+{
+private:
+  TreeModel* model_;
+
+  Vector position_;
+  double height_;
+  double thickness_;
+  Color barkTint_;
+  Color leafTint_;
+};
+<span class="boring">}
+</span></code></pre></pre>
+<p>你可以将其想象成这样：</p>
+<p><img src="https://gpp.tkchu.me/images/flyweight-tree-model.png" alt="一行树，每个都有自己的参数和位置朝向，指向另一个有网格、纹理、树叶的树模型。" /></p>
+<blockquote>
+<p>这有点像<a href="05-3%E7%B1%BB%E5%9E%8B%E5%AF%B9%E8%B1%A1.html">类型对象</a>模式。
+两者都涉及将一个类中的状态委托给另外的类，来达到在不同实例间分享状态的目的。
+但是，这两种模式背后的意图不同。</p>
+<p>使用类型对象，目标是通过将类型引入对象模型，减少需要定义的类。
+伴随而来的内容分享是额外的好处。享元模式则是纯粹的为了效率。</p>
+</blockquote>
+<p>把所有的东西都存在主存里没什么问题，但是这对渲染也毫无帮助。
+在森林到屏幕上之前，它得先到 GPU。我们需要用显卡可以识别的方式共享数据。</p>
+<h2><a class="header" href="#一千个实例" id="一千个实例">一千个实例</a></h2>
+<p>为了减少需要推送到 GPU 的数据量，我们想把共享的数据——<code>TreeModel</code>——只发送<strong>一次</strong>。
+然后，我们分别发送每个树独特的数据——位置，颜色，大小。
+最后，我们告诉 GPU，“使用同一模型渲染每个实例”。</p>
+<p>幸运的是，今日的图形接口和显卡正好支持这一点。
+这些细节很繁琐且超出了这部书的范围，但是 Direct3D 和 OpenGL 都可以做<a href="http://en.wikipedia.org/wiki/Geometry_instancing"><em>实例渲染</em></a>。</p>
+<p>在这些 API 中，你需要提供两部分数据流。
+第一部分是一块需要渲染多次的共同数据——在例子中是树的网格和纹理。
+第二部分是实例的列表以及绘制第一部分时需要使用的参数。
+然后调用一次渲染，绘制整个森林。</p>
+<blockquote>
+<p>这个 API 是由显卡直接实现的，意味着享元模式也许是唯一的有硬件支持的 GoF 设计模式。</p>
+</blockquote>
+<h2><a class="header" href="#享元" id="享元">享元</a></h2>
+<p>好了，我们已经看了一个具体的例子，下面我介绍模式的通用部分。
+享元，就像它的名字暗示的那样，
+当你需要共享类时使用，通常是因为你有太多这种类了。</p>
+<p>实例渲染时，每棵树通过总线送到 GPU 消耗的更多是<strong>时间</strong>而非内存，但是基本要点是一样的。</p>
+<p>这个模式通过将对象的数据分为两种来解决这个问题。
+第一种数据没有特定指明是哪个对象的<strong>实例</strong>，因此可以在它们间分享。
+Gof 称之为<strong>固有</strong>状态，但是我更喜欢将其视为“上下文无关”部分。
+在这里的例子中，是树的网格和纹理。</p>
+<p>数据的剩余部分是<strong>变化</strong>状态，那些每个实例独一无二的东西。
+在这个例子中，是每棵树的位置，拉伸和颜色。
+就像这里的示例代码块一样，这种模式通过在每个对象出现时共享一份固有状态来节约内存。</p>
+<p>就目前而言，这看上去像是基础的资源共享，很难被称为一种模式。
+部分原因是在这个例子中，我们可以为共享状态划出一个清晰的<strong>身份</strong>：<code>TreeModel</code>。</p>
+<p>我发现，当共享对象没有有效定义的实体时，使用这种模式就不那么明显（使用它也就越发显得精明）。
+在那些情况下，这看上去是一个对象被魔术般地同时分配到了多个地方。
+让我展示给你另外一个例子。</p>
+<h2><a class="header" href="#扎根之所" id="扎根之所">扎根之所</a></h2>
+<p>这些树长出来的地方也需要在游戏中表示。
+这里可能有草，泥土，丘陵，湖泊，河流，以及其它任何你可以想到的地形。
+我们<strong>基于区块</strong>建立地表：世界的表面被划分为由微小区块组成的巨大网格。
+每个区块都由一种地形覆盖。</p>
+<p>每种地形类型都有一系列特性会影响游戏玩法：</p>
+<ul>
+<li>决定了玩家能够多快地穿过它的移动开销。</li>
+<li>表明能否用船穿过的水域标识。</li>
+<li>用来渲染它的纹理。</li>
+</ul>
+<p>因为我们游戏程序员偏执于效率，我们不会在每个区块中保存这些状态。
+相反，一个通用的方式是为每种地形使用一个枚举。</p>
+<blockquote>
+<p>再怎么样，我们也已经从树的例子吸取教训了。</p>
+</blockquote>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>enum Terrain
+{
+  TERRAIN_GRASS,
+  TERRAIN_HILL,
+  TERRAIN_RIVER
+  // 其他地形
+};
+<span class="boring">}
+</span></code></pre></pre>
+<p>然后，世界管理巨大的网格：</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>class World
+{
+private:
+  Terrain tiles_[WIDTH][HEIGHT];
+};
+<span class="boring">}
+</span></code></pre></pre>
+<blockquote>
+<p>这里我使用嵌套数组存储 2D 网格。
+在 C/C++中这样是很有效率的，因为它会将所有元素打包在一起。
+在 Java 或者其他内存管理语言中，那样做会实际给你一个数组，其中每个元素都是对数组的列的<strong>引用</strong>，那就不像你想要的那样内存友好了。</p>
+<p>反正，隐藏 2D 网格数据结构背后的实现细节，能使代码更好地工作。
+我这里这样做只是为了让其保持简单。</p>
+</blockquote>
+<p>为了获得区块的实际有用的数据，我们做了一些这样的事情：</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>int World::getMovementCost(int x, int y)
+{
+  switch (tiles_[x][y])
+  {
+    case TERRAIN_GRASS: return 1;
+    case TERRAIN_HILL:  return 3;
+    case TERRAIN_RIVER: return 2;
+      // 其他地形……
+  }
+}
+
+bool World::isWater(int x, int y)
+{
+  switch (tiles_[x][y])
+  {
+    case TERRAIN_GRASS: return false;
+    case TERRAIN_HILL:  return false;
+    case TERRAIN_RIVER: return true;
+      // 其他地形……
+  }
+}
+你知道我的意思了。这可行，但是我觉
+<span class="boring">}
+</span></code></pre></pre>
+<p>你知道我的意思了。这可行，但是我觉得很丑。
+移动开销和水域标识是区块的<strong>数据</strong>，但在这里它们散布在代码中。
+更糟的是，简单地形的数据被众多方法拆开了。
+如果能够将这些包裹起来就好了。毕竟，那是我们设计对象的目的。</p>
+<p>如果我们有实际的地形<strong>类</strong>就好了，像这样：</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>class Terrain
+{
+public:
+  Terrain(int movementCost,
+          bool isWater,
+          Texture texture)
+  : movementCost_(movementCost),
+    isWater_(isWater),
+    texture_(texture)
+  {}
+
+  int getMovementCost() const { return movementCost_; }
+  bool isWater() const { return isWater_; }
+  const Texture&amp; getTexture() const { return texture_; }
+
+private:
+  int movementCost_;
+  bool isWater_;
+  Texture texture_;
+};
+<span class="boring">}
+</span></code></pre></pre>
+<blockquote>
+<p>你会注意这里所有的方法都是<code>const</code>。这不是巧合。
+由于同一对象在多处引用，如果你修改了它，改变会同时在多个地方出现。</p>
+<p>这也许不是你想要的。
+通过分享对象来节约内存的这种优化，不应该影响到应用的显性行为。
+因此，享元对象几乎总是不可变的。</p>
+</blockquote>
+<p>但是我们不想为每个区块都保存一个实例。
+如果你看看这个类内部，你会发现里面实际上<strong>什么也没有</strong>，
+唯一特别的是区块在<strong>哪里</strong>。
+用享元的术语讲，区块的<strong>所有</strong>状态都是“固有的”或者说“上下文无关的”。</p>
+<p>鉴于此，我们没有必要保存多个同种地形类型。
+地面上的草区块两两无异。
+我们不用地形区块对象枚举构成世界网格，而是用<code>Terrain</code>对象<strong>指针</strong>组成网格：</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>class World
+{
+private:
+  Terrain* tiles_[WIDTH][HEIGHT];
+
+  // 其他代码……
+};
+<span class="boring">}
+</span></code></pre></pre>
+<p>每个相同地形的区块会指向相同的地形实例。</p>
+<p><img src="https://gpp.tkchu.me/images/flyweight-tiles.png" alt="一行区块，每个区块指向共享的草、河、山丘对象。" /></p>
+<p>由于地形实例在很多地方使用，如果你想要动态分配，它们的生命周期会有点复杂。
+因此，我们直接在游戏世界中存储它们。</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>class World
+{
+public:
+  World()
+  : grassTerrain_(1, false, GRASS_TEXTURE),
+    hillTerrain_(3, false, HILL_TEXTURE),
+    riverTerrain_(2, true, RIVER_TEXTURE)
+  {}
+
+private:
+  Terrain grassTerrain_;
+  Terrain hillTerrain_;
+  Terrain riverTerrain_;
+
+  // 其他代码……
+};
+<span class="boring">}
+</span></code></pre></pre>
+<p>然后我们可以像这样来描绘地面：</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>void World::generateTerrain()
+{
+  // 将地面填满草皮.
+  for (int x = 0; x &lt; WIDTH; x++)
+  {
+    for (int y = 0; y &lt; HEIGHT; y++)
+    {
+      // 加入一些丘陵
+      if (random(10) == 0)
+      {
+        tiles_[x][y] = &amp;hillTerrain_;
+      }
+      else
+      {
+        tiles_[x][y] = &amp;grassTerrain_;
+      }
+    }
+  }
+
+  // 放置河流
+  int x = random(WIDTH);
+  for (int y = 0; y &lt; HEIGHT; y++) {
+    tiles_[x][y] = &amp;riverTerrain_;
+  }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<blockquote>
+<p>我承认这不是世界上最好的地形生成算法。</p>
+</blockquote>
+<p>现在不需要<code>World</code>中的方法来接触地形属性，我们可以直接暴露出<code>Terrain</code>对象。</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>const Terrain&amp; World::getTile(int x, int y) const
+{
+  return *tiles_[x][y];
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>用这种方式，<code>World</code>不再与各种地形的细节耦合。
+如果你想要某一区块的属性，可直接从那个对象获得：</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>int cost = world.getTile(2, 3).getMovementCost();
+<span class="boring">}
+</span></code></pre></pre>
+<p>我们回到了操作实体对象的 API，几乎没有额外开销——指针通常不比枚举大。</p>
+<h2><a class="header" href="#性能如何" id="性能如何">性能如何</a></h2>
+<p>我在这里说几乎，是因为性能偏执狂肯定会想要知道它和枚举比起来如何。
+通过解引用指针获取地形需要一次间接跳转。
+为了获得移动开销这样的地形数据，你首先需要跟着网格中的指针找到地形对象，
+然后再找到移动开销。跟踪这样的指针会导致缓存不命中，降低运行速度。</p>
+<blockquote>
+<p>需要更多指针追逐和缓存不命中的相关信息，看看<a href="07-1%E6%95%B0%E6%8D%AE%E5%B1%80%E9%83%A8%E6%80%A7.html">数据局部性</a>这章。</p>
+</blockquote>
+<p>就像往常一样，优化的金科玉律是<strong>需求优先</strong>。
+现代计算机硬件过于复杂，性能只是游戏的一个考虑方面。
+在我这章做的测试中，享元较枚举没有什么性能上的损失。
+享元实际上明显更快。但是这完全取决于内存中的事物是如何排列的。</p>
+<p>我<strong>可以</strong>自信地说使用享元对象不会搞到不可收拾。
+它给了你面向对象的优势，而且没有产生一堆对象。
+如果你创建了一个枚举，又在它上面做了很多分支跳转，考虑一下这个模式吧。
+如果你担心性能，那么至少在把代码编程为难以维护的风格之前先做些性能分析。</p>
+<h2><a class="header" href="#参见" id="参见">参见</a></h2>
+<ul>
+<li>
+<p>在区块的例子中，我们只是为每种地形创建一个实例然后存储在<code>World</code>中。
+这也许能更好找到和重用这些实例。
+但是在多数情况下，你不会在一开始就创建<strong>所有</strong>享元。</p>
+<p>如果你不能预料哪些是实际上需要的，最好在需要时才创建。
+为了保持共享的优势，当你需要一个时，首先看看是否已经创建了一个相同的实例。
+如果确实如此，那么只需返回那个实例。</p>
+<p>这通常意味需要将构造函数封装在查询对象是否存在的接口之后。<br />
+像这样隐藏构造指令是<a href="http://en.wikipedia.org/wiki/Factory_method_pattern">工厂方法</a>的一个例子。</p>
+</li>
+<li>
+<p>为了返回一个早先创建的享元，需要追踪那些已经实例化的对象池。<br />
+正如其名，这意味着<a href="07-3%E5%AF%B9%E8%B1%A1%E6%B1%A0%E6%A8%A1%E5%BC%8F.html">对象池</a>是存储它们的好地方。</p>
+</li>
+<li>
+<p>当使用<a href="03-6%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F.html">状态模式</a>时，
+经常会出现一些没有任何特定字段的“状态对象”。
+这个状态的标识和方法都很有用。
+在这种情况下，你可以使用这个模式，然后在不同的状态机上使用相同的对象实例。</p>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="03-1命令模式.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="03-3观察者模式.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="03-1命令模式.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="03-3观察者模式.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
