@@ -11,7 +11,10 @@ create-missing = true
 theme = "src/theme"
 default-theme = "rust"
 additional-css = ["theme/theme.css"]
+git-repository-url = "https://github.com/peaceshi/GameProgrammingPatterns"
 [output.html.playpen]
 editable = false
 copy-js = true
 line-numbers = false
+[output.html.search]
+enable = false
