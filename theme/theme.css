@@ -1,20 +1,21 @@
 html {
-    font-family: "sarasa sc";
+	font-family: "sarasa sc";
 }
-p{
+h2,
+h3 {
+	margin-top: 1.25em;
+	margin-bottom: 1.25em;
+}
+p,
+li {
 	line-height: 1.5em;
-    text-indent: 0em;
+}
+code {
+	font-size: 1em;
 }
 :not(pre) > .hljs {
 	padding-block-start: 0em;
 	padding-block-end: 0em;
 	font-family: "sarasa sc";
 	font-size: 1em;
-}
-code {
-    font-size: 1em;
-}
-h2, h3 {
-	margin-top: 1.25em;
-	margin-bottom: 1.25em;
 }
