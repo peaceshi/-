@@ -200,7 +200,13 @@
 除非改动很小，否则就还需要一些微调新代码的工作，使之无缝对接到程序的其他部分。
 如果你做对了，那么下个编写代码的人无法察觉到哪些代码是新加入的。</p>
 <p>简而言之，编程的流程图看起来是这样的：</p>
-<p><img src="https://gpp.tkchu.me/images/architecture-cycle.png" alt="令人震惊的死循环" /></p>
+<pre><code class="language-mermaid">graph LR
+
+获得问题 --&gt; 研究代码
+研究代码 --&gt; 编写解决方案
+编写解决方案 --&gt; 清理代码
+清理代码 --&gt; 获得问题
+</code></pre>
 <blockquote>
 <p>令人震惊的死循环，我看到了。</p>
 </blockquote>
@@ -460,6 +466,10 @@
         <script src="book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="plugin/mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="plugin/mermaid-init.js"></script>
         
 
         

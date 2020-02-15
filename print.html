@@ -437,7 +437,13 @@
 除非改动很小，否则就还需要一些微调新代码的工作，使之无缝对接到程序的其他部分。
 如果你做对了，那么下个编写代码的人无法察觉到哪些代码是新加入的。</p>
 <p>简而言之，编程的流程图看起来是这样的：</p>
-<p><img src="https://gpp.tkchu.me/images/architecture-cycle.png" alt="令人震惊的死循环" /></p>
+<pre><code class="language-mermaid">graph LR
+
+获得问题 --&gt; 研究代码
+研究代码 --&gt; 编写解决方案
+编写解决方案 --&gt; 清理代码
+清理代码 --&gt; 获得问题
+</code></pre>
 <blockquote>
 <p>令人震惊的死循环，我看到了。</p>
 </blockquote>
@@ -5781,11 +5787,17 @@ CPU 通过从 RAM 上读取数据到缓存上来优化读取。
 <span class="boring">}
 </span></code></pre></pre>
 <p>然后，把每块表达式，每条语言规则，都装到<strong>对象</strong>中去。数字字面量都变成对象：</p>
-<p><img src="https://gpp.tkchu.me/images/bytecode-numbers.png" alt="一系列数字字面量对象。" /></p>
+<pre><code class="language-mermaid">graph TB
+    A; B; C; D;
+</code></pre>
 <p>简单地说，它们在原始值上做了个小封装。
 运算符也是对象，它们拥有操作数的引用。
-如果你考虑了括号和优先级，那么表达式就魔术般变成这样的小树：
-<img src="https://gpp.tkchu.me/images/bytecode-ast.png" alt="一个语法树。数字字面量被运算符对象连接着。" /></p>
+如果你考虑了括号和优先级，那么表达式就魔术般变成这样的小树：</p>
+<pre><code class="language-mermaid">graph TB
+    * --&gt; + &amp; -;
+    + --&gt; 1 &amp; 2;
+    - --&gt; 3 &amp; 4;
+</code></pre>
 <blockquote>
 <p>这里的“魔术”是什么？很简单——<strong>语法分析（parsing）</strong>。
 语法分析器接受一串字符作为输入，将其转为<strong>抽象语法树（Abstract syntax tree，AST）</strong>，即一个包含了表示文本语法结构的对象集合。</p>
@@ -6607,7 +6619,7 @@ int value_;
 <ul>
 <li>
 <p><strong>如果你定义了基于文本的语言：</strong></p>
-</li>
+<ul>
 <li>
 <p><strong>必须定义语法。</strong>
 业余和专业的语言设计师小看这件事情的难度。让解析器高兴很简单，让<strong>用户</strong>快乐很<strong>难</strong>。</p>
@@ -6629,9 +6641,11 @@ int value_;
 <p>大部分非程序员不这样想。
 对他们来说，输入文本文件就像为愤怒机器人审核员填写税表，如果忘记了一个分号就会遭到痛斥。</p>
 </li>
+</ul>
+</li>
 <li>
 <p><strong>如果你定义了一个图形化创作工具：</strong></p>
-</li>
+<ul>
 <li>
 <p><strong>必须实现用户界面。</strong>
 按钮，点击，拖动，诸如此类。
@@ -6648,13 +6662,15 @@ int value_;
 <li>
 <p><strong>更难移植。</strong>
 文本编译器的好处是，文本文件是通用的。编译器简单地读入文件并写出。跨平台移植的工作实在微不足道。</p>
+</li>
+</ul>
 <blockquote>
 <p>除了换行符。还有编码。</p>
 </blockquote>
-</li>
-</ul>
 <p>当你构建用户界面，你必须选择要使用的架构，其中很多是基于某个操作系统。
 也有跨平台的用户界面工具包，但他们往往要为对所有平台同样适用付出代价——它们在不同的平台上同样差异很大。</p>
+</li>
+</ul>
 <h2><a class="header" href="#参见-5" id="参见-5">参见</a></h2>
 <ul>
 <li>
@@ -6730,6 +6746,10 @@ int value_;
         <script src="book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="plugin/mermaid.min.js"></script>
+        
+        <script type="text/javascript" src="plugin/mermaid-init.js"></script>
         
 
         
