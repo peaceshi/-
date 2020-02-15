@@ -19,3 +19,19 @@ code {
 	font-family: "sarasa sc";
 	font-size: 1em;
 }
+pre.mermaid {
+	position: relative;
+	border-radius: 5px;
+	padding-block-start: 2em;
+	padding-block-end: 2em;
+	background-color: #fdfbf5;
+	background-image: linear-gradient(transparent 98%, rgb(204, 204, 204) 98%),
+		linear-gradient(to right, transparent 98%, rgb(204, 204, 204) 98%);
+	background-size: 30px 30px;
+	background-position: 10px 10px;
+}
+svg {
+	margin-inline-start: auto;
+	margin-inline-end: auto;
+	display: flex;
+}
