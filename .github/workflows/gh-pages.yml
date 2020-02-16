@@ -11,15 +11,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup mermaid
-              run: |
-                  export mermaid_VERSION="0.2.2"
-                  export mermaid_TARBALL="mdbook-mermaid-${mermaid_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
-                  wget -q "https://github.com/badboy/mdbook-mermaid/releases/download/${mermaid_VERSION}/${mermaid_TARBALL}"
-                  tar -zxvf "${mermaid_TARBALL}"
-                  rm "${mermaid_TARBALL}"
-                  mkdir ~/bin
-                  mv ./mdbook-mermaid ~/bin/
-                  echo "::add-path::~/bin"
+        run: |
+          export mermaid_VERSION="0.2.2"
+          export mermaid_TARBALL="mdbook-mermaid-${mermaid_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
+          wget -q "https://github.com/badboy/mdbook-mermaid/releases/download/${mermaid_VERSION}/${mermaid_TARBALL}"
+          tar -zxvf "${mermaid_TARBALL}"
+          rm "${mermaid_TARBALL}"
+          mkdir ~/bin
+          mv ./mdbook-mermaid ~/bin/
+          echo "::add-path::~/bin"
       - name: Setup github pages
         uses: peaceiris/actions-mdbook@v1
         with:
