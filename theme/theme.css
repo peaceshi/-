@@ -35,3 +35,10 @@ svg {
 	margin-inline-end: auto;
 	display: flex;
 }
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('https://cdn.staticfile.org/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0&display=swap');
+    font-weight: normal;
+    font-style: normal;
+    font-display:swap
+}
