@@ -137,7 +137,9 @@
 <h2><a class="header" href="#意图" id="意图">意图</a></h2>
 <blockquote>
 <blockquote>
+<blockquote>
 <p><strong>将行为编码为虚拟机器上的指令，赋予其数据的灵活性。</strong></p>
+</blockquote>
 </blockquote>
 </blockquote>
 <h2><a class="header" href="#动机" id="动机">动机</a></h2>
@@ -188,17 +190,17 @@
 <span class="boring">}
 </span></code></pre></pre>
 <p>然后，把每块表达式，每条语言规则，都装到<strong>对象</strong>中去。数字字面量都变成对象：</p>
-<pre><code class="language-mermaid">graph TB
+<pre class="mermaid">graph TB
     A; B; C; D;
-</code></pre>
+</pre>
 <p>简单地说，它们在原始值上做了个小封装。
 运算符也是对象，它们拥有操作数的引用。
 如果你考虑了括号和优先级，那么表达式就魔术般变成这样的小树：</p>
-<pre><code class="language-mermaid">graph TB
-    * --&gt; + &amp; -;
-    + --&gt; 1 &amp; 2;
-    - --&gt; 3 &amp; 4;
-</code></pre>
+<pre class="mermaid">graph TB
+    * --> + & -;
+    + --> 1 & 2;
+    - --> 3 & 4;
+</pre>
 <blockquote>
 <p>这里的“魔术”是什么？很简单——<strong>语法分析（parsing）</strong>。
 语法分析器接受一串字符作为输入，将其转为<strong>抽象语法树（Abstract syntax tree，AST）</strong>，即一个包含了表示文本语法结构的对象集合。</p>

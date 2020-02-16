@@ -431,13 +431,13 @@
 除非改动很小，否则就还需要一些微调新代码的工作，使之无缝对接到程序的其他部分。
 如果你做对了，那么下个编写代码的人无法察觉到哪些代码是新加入的。</p>
 <p>简而言之，编程的流程图看起来是这样的：</p>
-<pre><code class="language-mermaid">graph LR
+<pre class="mermaid">graph LR
 
-获得问题 --&gt; 研究代码
-研究代码 --&gt; 编写解决方案
-编写解决方案 --&gt; 清理代码
-清理代码 --&gt; 获得问题
-</code></pre>
+获得问题 --> 研究代码
+研究代码 --> 编写解决方案
+编写解决方案 --> 清理代码
+清理代码 --> 获得问题
+</pre>
 <blockquote>
 <p>令人震惊的死循环，我看到了。</p>
 </blockquote>
@@ -677,7 +677,9 @@
 <strong>我的</strong>命令模式精简定义为：</p>
 <blockquote>
 <blockquote>
+<blockquote>
 <p>命令是具现化的方法调用。</p>
+</blockquote>
 <p>A command is a reified method call.</p>
 </blockquote>
 <p>“Reify（具现化）”来自于拉丁语“res”，意为“thing”（事物），加上英语后缀“-fy”。
@@ -1742,7 +1744,9 @@ public:
 UI 程序员——那些使用基于事件的编程的程序员已经这么干了很多年了——有句经典名言：</p>
 <blockquote>
 <blockquote>
+<blockquote>
 <p>“远离 UI 线程”。</p>
+</blockquote>
 </blockquote>
 </blockquote>
 <p>如果要对事件同步响应，你需要完成响应，尽可能快地返回，这样 UI 就不会锁死。
@@ -3488,7 +3492,9 @@ GoF 的状态模式是一个方法——我们会谈到的——但先从简单�
 这带领我们走向状态模式。GoF 这样描述状态模式：</p>
 <blockquote>
 <blockquote>
+<blockquote>
 <p>允许一个对象在其内部状态发生变化时改变自己的行为，该对象看起来好像修改了它的类型。</p>
+</blockquote>
 </blockquote>
 </blockquote>
 <p>这可没太多帮助。我们的<code>switch</code>也完成了这一点。
@@ -3962,7 +3968,9 @@ public:
 <h2><a class="header" href="#意图" id="意图">意图</a></h2>
 <blockquote>
 <blockquote>
+<blockquote>
 <p><em>用序列的操作模拟瞬间或者同时发生的事情。</em></p>
+</blockquote>
 </blockquote>
 </blockquote>
 <h2><a class="header" href="#动机" id="动机">动机</a></h2>
@@ -5673,14 +5681,16 @@ CPU 通过从 RAM 上读取数据到缓存上来优化读取。
 <li>
 <p><strong>如果你使用单独的集合保存活动对象：</strong></p>
 <ul>
-<li><em>使用了额外的内存管理第二个集合。</em>
+<li>
+<p><em>使用了额外的内存管理第二个集合。</em>
 当你需要所有实体时，通常又需要一个巨大的集合。在那种情况下，这集合是多余的。
-在速度比内存要求更高的时候（通常如此），这取舍仍是值得的。</li>
-</ul>
-<p>另一个权衡后的选择是使用两个集合，除了活动对象集合的另一个集合只包含<strong>不活跃</strong>实体而不是全部实体。</p>
-<ul>
-<li><em>得保持集合同步。</em>
-当对象创建或完全销毁时（不是暂时停用），你得修改全部对象集合和活跃对象集合。</li>
+在速度比内存要求更高的时候（通常如此），这取舍仍是值得的。
+另一个权衡后的选择是使用两个集合，除了活动对象集合的另一个集合只包含<strong>不活跃</strong>实体而不是全部实体。</p>
+</li>
+<li>
+<p><em>得保持集合同步。</em>
+当对象创建或完全销毁时（不是暂时停用），你得修改全部对象集合和活跃对象集合。</p>
+</li>
 </ul>
 </li>
 </ul>
@@ -5730,7 +5740,9 @@ CPU 通过从 RAM 上读取数据到缓存上来优化读取。
 <h2><a class="header" href="#意图-3" id="意图-3">意图</a></h2>
 <blockquote>
 <blockquote>
+<blockquote>
 <p><strong>将行为编码为虚拟机器上的指令，赋予其数据的灵活性。</strong></p>
+</blockquote>
 </blockquote>
 </blockquote>
 <h2><a class="header" href="#动机-3" id="动机-3">动机</a></h2>
@@ -5781,17 +5793,17 @@ CPU 通过从 RAM 上读取数据到缓存上来优化读取。
 <span class="boring">}
 </span></code></pre></pre>
 <p>然后，把每块表达式，每条语言规则，都装到<strong>对象</strong>中去。数字字面量都变成对象：</p>
-<pre><code class="language-mermaid">graph TB
+<pre class="mermaid">graph TB
     A; B; C; D;
-</code></pre>
+</pre>
 <p>简单地说，它们在原始值上做了个小封装。
 运算符也是对象，它们拥有操作数的引用。
 如果你考虑了括号和优先级，那么表达式就魔术般变成这样的小树：</p>
-<pre><code class="language-mermaid">graph TB
-    * --&gt; + &amp; -;
-    + --&gt; 1 &amp; 2;
-    - --&gt; 3 &amp; 4;
-</code></pre>
+<pre class="mermaid">graph TB
+    * --> + & -;
+    + --> 1 & 2;
+    - --> 3 & 4;
+</pre>
 <blockquote>
 <p>这里的“魔术”是什么？很简单——<strong>语法分析（parsing）</strong>。
 语法分析器接受一串字符作为输入，将其转为<strong>抽象语法树（Abstract syntax tree，AST）</strong>，即一个包含了表示文本语法结构的对象集合。</p>
