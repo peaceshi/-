@@ -18,8 +18,8 @@ jobs:
           tar -zxvf "${mermaid_TARBALL}"
           rm "${mermaid_TARBALL}"
           mkdir ~/bin
-          mv ./mdbook-mermaid ~/bin/
-          echo "::add-path::~/bin"
+          mv ./mdbook-mermaid /home/runner/toolbin/
+          echo "::add-path::/home/runner/toolbin/"
       - name: Setup github pages
         uses: peaceiris/actions-mdbook@v1
         with:
