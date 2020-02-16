@@ -17,9 +17,10 @@ jobs:
           wget -q "https://github.com/badboy/mdbook-mermaid/releases/download/${mermaid_VERSION}/${mermaid_TARBALL}"
           tar -zxvf "${mermaid_TARBALL}"
           rm "${mermaid_TARBALL}"
-          mkdir ~/bin
-          mv ./mdbook-mermaid /home/runner/toolbin/
-          echo "::add-path::/home/runner/toolbin/"
+          mkdir -p $GITHUB_WORKSPACE/bin
+          mv ./mdbook-mermaid $GITHUB_WORKSPACE/bin
+          echo "::add-path::$GITHUB_WORKSPACE/bin"
+          chmod +x $GITHUB_WORKSPACE/bin/mdbook-mermaid
       - name: Setup github pages
         uses: peaceiris/actions-mdbook@v1
         with:
