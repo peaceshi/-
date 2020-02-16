@@ -11,7 +11,7 @@ create-missing = true
 theme = "src/theme"
 default-theme = "rust"
 additional-css = ["theme/theme.css"]
-additional-js = ["plugin/mermaid.min.js", "plugin/mermaid-init.js"]
+additional-js = ["plugin/init.js"]
 git-repository-url = "https://github.com/peaceshi/GameProgrammingPatterns"
 [output.html.playpen]
 editable = false
