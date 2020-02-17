@@ -51,7 +51,7 @@ registerRoute(
 registerRoute(
 	/\.css$/,
 	new CacheFirst({
-		cacheName: "image-cache",
+		cacheName: "css-cache",
 		plugins: [
 			new CacheableResponse({ statuses: [0, 200] }),
 			new ExpirationPlugin({
@@ -80,7 +80,14 @@ registerRoute(
 );
 
 registerRoute(
-	/^https:\/\/cdn.staticfile.org\*.min.*$/,
+	/^https:\/\/cdn.staticfile.org\*$/,
+	new CacheFirst({
+		cacheName: "CDN-cache",
+		plugins: [new CacheableResponse({ statuses: [0, 200] })]
+	})
+);
+registerRoute(
+	/^https:\/\/cdn.jsdelivr.net\*$/,
 	new CacheFirst({
 		cacheName: "CDN-cache",
 		plugins: [new CacheableResponse({ statuses: [0, 200] })]
