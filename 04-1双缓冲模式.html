@@ -6,30 +6,65 @@
 	<meta charset="UTF-8">
 	<title>双缓冲模式 - 游戏编程模式</title>
 	
-	<link rel="manifest" href="manifest.json">
+
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 	<meta name="description" content="游戏编程模式">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="theme-color" content="#ffffff" />
+
+	<link rel="manifest" href="manifest.json">
 	<link href='https://storage.googleapis.com/' rel='preconnect' crossorigin>
 	<link href='https://cdn.jsdelivr.net/' rel='preconnect' crossorigin>
 	<link href='https://play.rust-lang.org' rel='preconnect' crossorigin>
 	<link href='https://cdn.staticfile.org/' rel='preconnect' crossorigin>
 	<link href='https://peaceshi.github.io/' rel='preconnect' crossorigin>
-	<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/favicon.png">
-	<link rel="preload" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/css/variables.css" as="style">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/css/variables.css">
-	<link rel="preload" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/css/general.css" as="style">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/css/general.css">
-	<link rel="preload" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/css/chrome.css" as="style">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/css/chrome.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/css/print.css" media="print">
+	<link rel="shortcut icon"
+		href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/favicon.png">
+	<link rel="preload"
+		href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/css/variables.css" as="style">
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/css/variables.css">
+	<link rel="preload"
+		href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/css/general.css" as="style">
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/css/general.css">
+	<link rel="preload"
+		href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/css/chrome.css" as="style">
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/css/chrome.css">
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/css/print.css" media="print">
 	<!-- Fonts -->
-	<link rel="preload" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" as="style" crossorigin>
-	<link rel='stylesheet' href='https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css' type='text/css' crossorigin>
-	<link rel="preload" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/default.min.css" as="style" crossorigin>
-	<link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/default.min.css" type='text/css' crossorigin>
+	<link rel="preload" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" as="style"
+		crossorigin>
+	<link rel='stylesheet' href='https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css' type='text/css'
+		crossorigin>
+	<!-- Highlight.js Stylesheets -->
+	<link rel="preload" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/default.min.css" as="style"
+		crossorigin>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/default.min.css" type='text/css'
+		crossorigin>
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/ayu-highlight.css" crossorigin>
+	<link rel="preload" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/ayu-highlight.css"
+		as="style" crossorigin>
+		<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/highlight.css" crossorigin>
+	<link rel="preload" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/highlight.css"
+		as="style" crossorigin>
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/tomorrow-night.css" crossorigin>
+	<link rel="preload" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/tomorrow-night.css"
+		as="style" crossorigin>
 
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/theme.css"
+		crossorigin>
+	<link rel="preload" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/theme.css"
+		as="style" crossorigin>
+	<!-- Custom theme stylesheets -->
+	
+	
+	
 	
 </head>
 
@@ -79,17 +114,6 @@
 		html.classList.remove('sidebar-visible');
 		html.classList.add("sidebar-" + sidebar);
 	</script>
-
-	<!-- Custom theme stylesheets -->
-	
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/theme.css" crossorigin>
-	<link rel="preload" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/theme.css" as="style" crossorigin>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/ayu-highlight.css" crossorigin>
-	<link rel="preload" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/ayu-highlight.css" as="style" crossorigin>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/tomorrow-night.css" crossorigin>
-	<link rel="preload" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/tomorrow-night.css" as="style" crossorigin>
-	
-	
 	<nav id="sidebar" class="sidebar" aria-label="Table of contents">
 		<div id="sidebar-scrollbox" class="sidebar-scrollbox">
 			<ol class="chapter"><li class="expanded affix "><a href="0说明.html">说明</a></li><li class="expanded affix "><a href="00致谢.html">致谢</a></li><li class="expanded affix "><a href="01序.html">作者序</a></li><li class="expanded affix "><a href="02架构，性能和游戏.html">架构，性能和游戏</a></li><li class="expanded "><a href="03重返设计模式.html"><strong aria-hidden="true">1.</strong> 重返设计模式</a></li><li><ol class="section"><li class="expanded "><a href="03-1命令模式.html"><strong aria-hidden="true">1.1.</strong> 命令模式</a></li><li class="expanded "><a href="03-2享元模式.html"><strong aria-hidden="true">1.2.</strong> 享元模式</a></li><li class="expanded "><a href="03-3观察者模式.html"><strong aria-hidden="true">1.3.</strong> 观察者模式</a></li><li class="expanded "><a href="03-4原型模式.html"><strong aria-hidden="true">1.4.</strong> 原型模式</a></li><li class="expanded "><a href="03-5单例模式.html"><strong aria-hidden="true">1.5.</strong> 单例模式</a></li><li class="expanded "><a href="03-6状态模式.html"><strong aria-hidden="true">1.6.</strong> 状态模式</a></li></ol></li><li class="expanded "><a href="04序列模式.html"><strong aria-hidden="true">2.</strong> 序列模式</a></li><li><ol class="section"><li class="expanded "><a href="04-1双缓冲模式.html" class="active"><strong aria-hidden="true">2.1.</strong> 双缓冲模式</a></li><li class="expanded "><a href="04-2游戏循环.html"><strong aria-hidden="true">2.2.</strong> 游戏循环</a></li><li class="expanded "><a href="04-3更新方法.html"><strong aria-hidden="true">2.3.</strong> 更新方法</a></li></ol></li><li class="expanded "><a href="05行为模式.html"><strong aria-hidden="true">3.</strong> 行为模式</a></li><li><ol class="section"><li class="expanded "><a href="05-1字节码.html"><strong aria-hidden="true">3.1.</strong> 字节码</a></li><li class="expanded "><a href="05-2子类沙箱.html"><strong aria-hidden="true">3.2.</strong> 子类沙箱</a></li><li class="expanded "><a href="05-3类型对象.html"><strong aria-hidden="true">3.3.</strong> 类型对象</a></li></ol></li><li class="expanded "><a href="06解耦模式.html"><strong aria-hidden="true">4.</strong> 解耦模式</a></li><li><ol class="section"><li class="expanded "><a href="06-1组件模式.html"><strong aria-hidden="true">4.1.</strong> 组件模式</a></li><li class="expanded "><a href="06-2事件队列.html"><strong aria-hidden="true">4.2.</strong> 事件队列</a></li><li class="expanded "><a href="06-3服务定位器.html"><strong aria-hidden="true">4.3.</strong> 服务定位器</a></li></ol></li><li class="expanded "><a href="07优化模式.html"><strong aria-hidden="true">5.</strong> 优化模式</a></li><li><ol class="section"><li class="expanded "><a href="07-1数据局部性.html"><strong aria-hidden="true">5.1.</strong> 数据局部性</a></li><li class="expanded "><a href="07-2脏标识模式.html"><strong aria-hidden="true">5.2.</strong> 脏标识模式</a></li><li class="expanded "><a href="07-3对象池模式.html"><strong aria-hidden="true">5.3.</strong> 对象池模式</a></li><li class="expanded "><a href="07-3空间分区.html"><strong aria-hidden="true">5.4.</strong> 空间分区</a></li></ol></li><li class="expanded "><a href="附录一.html">附录一</a></li></ol>
@@ -108,16 +132,22 @@
 							aria-label="Toggle Table of Contents" aria-controls="sidebar">
 							<i class="fa fa-bars"></i>
 						</button>
-						<button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme"
-							aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+						<button id="theme-toggle" class="icon-button" type="button" title="Change theme"
+							aria-label="Change theme" aria-haspopup="true" aria-expanded="false"
+							aria-controls="theme-list">
 							<i class="fa fa-paint-brush"></i>
 						</button>
 						<ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-							<li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
-							<li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
-							<li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-							<li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-							<li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+							<li role="none"><button role="menuitem" class="theme"
+									id="light">Light</button></li>
+							<li role="none"><button role="menuitem" class="theme"
+									id="rust">Rust (default)</button></li>
+							<li role="none"><button role="menuitem" class="theme"
+									id="coal">Coal</button></li>
+							<li role="none"><button role="menuitem" class="theme"
+									id="navy">Navy</button></li>
+							<li role="none"><button role="menuitem" class="theme"
+									id="ayu">Ayu</button></li>
 						</ul>
 						
 					</div>
@@ -760,15 +790,15 @@ Frame 3 drawn on buffer A
 				<nav class="nav-wrapper" aria-label="Page navigation">
 					<!-- Mobile navigation buttons -->
 					
-					<a rel="prev" href="04序列模式.html" class="mobile-nav-chapters previous" title="Previous chapter"
-						aria-label="Previous chapter" aria-keyshortcuts="Left">
+					<a rel="prev" href="04序列模式.html" class="mobile-nav-chapters previous"
+						title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
 						<i class="fa fa-angle-left"></i>
 					</a>
 					
 
 					
-					<a rel="next" href="04-2游戏循环.html" class="mobile-nav-chapters next" title="Next chapter"
-						aria-label="Next chapter" aria-keyshortcuts="Right">
+					<a rel="next" href="04-2游戏循环.html" class="mobile-nav-chapters next"
+						title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
 						<i class="fa fa-angle-right"></i>
 					</a>
 					
@@ -787,8 +817,8 @@ Frame 3 drawn on buffer A
 			
 
 			
-			<a href="04-2游戏循环.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter"
-				aria-keyshortcuts="Right">
+			<a href="04-2游戏循环.html" class="nav-chapters next" title="Next chapter"
+				aria-label="Next chapter" aria-keyshortcuts="Right">
 				<i class="fa fa-angle-right"></i>
 			</a>
 			
@@ -813,9 +843,9 @@ Frame 3 drawn on buffer A
 	
 	<script src="https://cdn.staticfile.org/clipboard.js/2.0.4/clipboard.min.js"></script>
 	<script src="https://cdn.staticfile.org/highlight.js/9.18.1/highlight.min.js"></script>
-	<script defer src="https://cdn.staticfile.org/highlight.js/9.18.1/languages/basic.min.js"></script>
-	<script defer src="https://cdn.staticfile.org/lazysizes/5.2.0/lazysizes.min.js"></script>
-	<script defer src="https://cdn.staticfile.org/mermaid/8.4.6/mermaid.min.js"></script>
+	<script src="https://cdn.staticfile.org/highlight.js/9.18.1/languages/basic.min.js"></script>
+	<script src="https://cdn.staticfile.org/lazysizes/5.2.0/lazysizes.min.js"></script>
+	<script src="https://cdn.staticfile.org/mermaid/8.4.6/mermaid.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/book.js"></script>
 	<!-- Custom JS scripts -->
 	
