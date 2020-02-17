@@ -10,6 +10,9 @@ p,
 li {
 	line-height: 1.5em;
 }
+li.expanded{
+	line-height: 2.2em;
+}
 code {
 	font-size: 1em;
 }
@@ -34,6 +37,7 @@ svg {
 	margin-inline-start: auto;
 	margin-inline-end: auto;
 	display: flex;
+	width: 100%;
 }
 @font-face {
     font-family: 'FontAwesome';
