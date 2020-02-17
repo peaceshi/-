@@ -18,14 +18,14 @@
 	<link href='https://play.rust-lang.org' rel='preconnect' crossorigin>
 	<link href='https://cdn.staticfile.org/' rel='preconnect' crossorigin>
 	<link href='https://peaceshi.github.io/' rel='preconnect' crossorigin>
-	<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@master/src/theme/favicon.png">
-	<link rel="preload" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@master/src/theme/css/variables.css" as="style">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@master/src/theme/css/variables.css">
-	<link rel="preload" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@master/src/theme/css/general.css" as="style">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@master/src/theme/css/general.css">
-	<link rel="preload" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@master/src/theme/css/chrome.css" as="style">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@master/src/theme/css/chrome.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@master/src/theme/css/print.css" media="print">
+	<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/favicon.png">
+	<link rel="preload" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/css/variables.css" as="style">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/css/variables.css">
+	<link rel="preload" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/css/general.css" as="style">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/css/general.css">
+	<link rel="preload" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/css/chrome.css" as="style">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/css/chrome.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/css/print.css" media="print">
 	<!-- Fonts -->
 	<link rel="preload" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" as="style" crossorigin>
 	<link rel='stylesheet' href='https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css' type='text/css' crossorigin>
@@ -88,11 +88,13 @@
 
 	<!-- Custom theme stylesheets -->
 	{{#each additional_css}}
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@master/theme/theme.css" crossorigin>
-	<link rel="preload" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@master/theme/theme.css" as="style" crossorigin>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@master/theme/ayu-highlight.css" crossorigin>
-	<link rel="preload" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@master/theme/ayu-highlight.css" as="style" crossorigin>
-	<link rel="preload" href="{{ ../path_to_root }}{{ this }}" as="style" crossorigin>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/theme.css" crossorigin>
+	<link rel="preload" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/theme/theme.css" as="style" crossorigin>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/ayu-highlight.css" crossorigin>
+	<link rel="preload" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/ayu-highlight.css" as="style" crossorigin>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/tomorrow-night.css" crossorigin>
+	<link rel="preload" href="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/tomorrow-night.css" as="style" crossorigin>
+	{{!-- <link rel="stylesheet" href="{{ ../path_to_root }}{{ this }}" crossorigin> --}}
 	{{/each}}
 	<nav id="sidebar" class="sidebar" aria-label="Table of contents">
 		<div id="sidebar-scrollbox" class="sidebar-scrollbox">
@@ -280,10 +282,11 @@
 	<script defer src="https://cdn.staticfile.org/highlight.js/9.18.1/languages/basic.min.js"></script>
 	<script defer src="https://cdn.staticfile.org/lazysizes/5.2.0/lazysizes.min.js"></script>
 	<script defer src="https://cdn.staticfile.org/mermaid/8.4.6/mermaid.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@master/src/theme/book.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/book.js"></script>
 	<!-- Custom JS scripts -->
 	{{#each additional_js}}
-	<script type="text/javascript" src="{{ ../path_to_root }}{{this}}"></script>
+	<script src="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/plugin/init.js"></script>
+	{{!-- <script type="text/javascript" src="{{ ../path_to_root }}{{this}}"></script> --}}
 	{{/each}}
 	{{#if is_print}}
 	{{#if mathjax_support}}
