@@ -1,5 +1,6 @@
 import commonjs from "@rollup/plugin-commonjs";
 import nodeResolve from "@rollup/plugin-node-resolve";
+import replace from "@rollup/plugin-replace";
 
 module.exports = [
 	{
@@ -16,6 +17,12 @@ module.exports = [
 			file: "plugin/bundle.js",
 			format: "iife"
 		},
-		plugins: [commonjs(), nodeResolve()]
+		plugins: [
+			commonjs(),
+			nodeResolve(),
+			replace({
+				"process.env.NODE_ENV": JSON.stringify("production")
+			})
+		]
 	}
 ];
