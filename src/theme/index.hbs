@@ -309,15 +309,15 @@
 	<script src="{{ path_to_root }}elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="{{ path_to_root }}mark.min.js" type="text/javascript" charset="utf-8"></script>
 	{{/if}}
-	<script src="https://cdn.staticfile.org/clipboard.js/2.0.4/clipboard.min.js"></script>
-	<script src="https://cdn.staticfile.org/highlight.js/9.18.1/highlight.min.js"></script>
-	<script src="https://cdn.staticfile.org/highlight.js/9.18.1/languages/basic.min.js"></script>
-	<script src="https://cdn.staticfile.org/lazysizes/5.2.0/lazysizes.min.js"></script>
-	<script src="https://cdn.staticfile.org/mermaid/8.4.6/mermaid.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/book.js"></script>
+	<script defer src="https://cdn.staticfile.org/clipboard.js/2.0.4/clipboard.min.js"></script>
+	<script defer src="https://cdn.staticfile.org/highlight.js/9.18.1/highlight.min.js"></script>
+	<script defer src="https://cdn.staticfile.org/highlight.js/9.18.1/languages/basic.min.js"></script>
+	<script defer src="https://cdn.staticfile.org/lazysizes/5.2.0/lazysizes.min.js"></script>
+	<script defer src="https://cdn.staticfile.org/mermaid/8.4.6/mermaid.min.js"></script>
+	<script defer src="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/book.js"></script>
 	<!-- Custom JS scripts -->
 	{{#each additional_js}}
-	<script src="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/plugin/init.js"></script>
+	<script defer src="https://cdn.jsdelivr.net/gh/peaceshi/GameProgrammingPatterns@gh-pages/plugin/init.js"></script>
 	{{!-- <script type="text/javascript" src="{{ ../path_to_root }}{{this}}"></script> --}}
 	{{/each}}
 	{{#if is_print}}
