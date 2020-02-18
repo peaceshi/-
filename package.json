@@ -1,0 +1,29 @@
+{
+  "name": "game-programming-patterns",
+  "version": "1.0.0",
+  "description": "游戏编程模式",
+  "main": "index.js",
+  "scripts": {
+    "build": "node ./plugin/build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peaceshi/GameProgrammingPatterns.git"
+  },
+  "author": "peaceshi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/peaceshi/GameProgrammingPatterns/issues"
+  },
+  "homepage": "https://peaceshi.github.io/GameProgrammingPatterns/index.html",
+  "dependencies": {
+    "workbox-cacheable-response": "^5.0.0",
+    "workbox-expiration": "^5.0.0",
+    "workbox-strategies": "^5.0.0",
+    "workbox-window": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/workbox-build": "^5.0.0",
+    "workbox-build": "^5.0.0"
+  }
+}
