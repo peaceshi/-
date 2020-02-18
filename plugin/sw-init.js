@@ -1,4 +1,4 @@
-import {Workbox} from "https://cdn.jsdelivr.net/npm/workbox-window@5.0.0/build/workbox-window.prod.mjs";
+import {Workbox} from "workbox-window";
 
 if ('serviceWorker' in navigator) {
   const wb = new Workbox('/GameProgrammingPatterns/service-worker.js');

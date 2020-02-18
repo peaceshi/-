@@ -4,7 +4,8 @@
   "description": "游戏编程模式",
   "main": "index.js",
   "scripts": {
-    "build": "node ./plugin/build.js"
+    "build": "node ./plugin/build.js",
+    "package": "rollup -c ./plugin/rollupjsconfig.js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,10 @@
     "workbox-window": "^5.0.0"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^11.0.2",
+    "@rollup/plugin-node-resolve": "^7.1.1",
     "@types/workbox-build": "^5.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
     "workbox-build": "^5.0.0"
   }
 }
