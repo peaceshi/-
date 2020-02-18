@@ -23,7 +23,7 @@ function registServiceWorker() {
 				}
 				// 注册 Service Worker
 				navigator.serviceWorker
-					.register("/GameProgrammingPatterns/sw.js", {
+					.register("/GameProgrammingPatterns/service-worker.js", {
 						scope: "/GameProgrammingPatterns/"
 					})
 					.then(
