@@ -10,6 +10,10 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
+      - name: Setup CDN 
+        run: |
+          export HEAD=$(git rev-parse --short HEAD)
+          sed -i 's/@master/@'$HEAD'/g' $GITHUB_WORKSPACE/src/theme/index.hbs
       - name: Setup mermaid
         run: |
           export mermaid_VERSION="0.2.2"
