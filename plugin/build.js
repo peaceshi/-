@@ -4,7 +4,7 @@ const buildSW = async () => {
 	// This will return a Promise
 	const { count, size, warnings } = await workboxBuild
 		.injectManifest({
-			swSrc: "src/sw.js",
+			swSrc: "src/service-worker.js",
 			swDest: "src/service-worker.js",
 			globDirectory: "book",
 			globPatterns: ["../src/*.{js,css,html,png,md}"]

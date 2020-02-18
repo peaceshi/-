@@ -1,7 +1,7 @@
 import {Workbox} from "https://cdn.jsdelivr.net/npm/workbox-window@5.0.0/build/workbox-window.prod.mjs";
 
 if ('serviceWorker' in navigator) {
-  const wb = new Workbox('/GameProgrammingPatterns/sw.js');
+  const wb = new Workbox('/GameProgrammingPatterns/service-worker.js');
 
   // Add an event listener to detect when the registered
   // service worker has installed but is waiting to activate.
