@@ -11,7 +11,7 @@ function patchImgElementTag() {
 		}
 	}
 }
-https://lavas-project.github.io/pwa-book
+//https://lavas-project.github.io/pwa-book
 function registServiceWorker() {
 	// Check that service workers are supported
 	if ("serviceWorker" in navigator) {
