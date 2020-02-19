@@ -1,6 +1,6 @@
 {
-	"name": "PWA",
-	"short_name": "Demo",
+	"name": "游戏编程模式",
+	"short_name": "游戏编程模式",
 	"icons": [
 		{
 			"src": "theme/favicon.png",
