@@ -48,9 +48,9 @@ registerRoute(
 	})
 );
 registerRoute(
-	/\.(?:png|jpg|jpeg|svg|gif)$/,
+	/^https:\/\/*\.(?:png|jpg|jpeg|svg|gif)$/,
 	new CacheFirst({
-		cacheName: "image-cache",
+		cacheName: "static-image-cache",
 		plugins: [
 			new CacheableResponsePlugin({ statuses: [0, 200] }),
 			new ExpirationPlugin({
@@ -64,7 +64,7 @@ registerRoute(
 );
 
 registerRoute(
-	/^https:\/\/*\.(?:html|css|js|json)$/,
+	/\.(?:html|css|js|json)$/,
 	new StaleWhileRevalidate({
 		cacheName: "cdn-static-cache"
 	})
