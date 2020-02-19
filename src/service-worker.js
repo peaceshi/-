@@ -47,16 +47,31 @@ registerRoute(
 		]
 	})
 );
-
 registerRoute(
-	/\.(?:html|css|js|json)$/,
+	/\.(?:png|jpg|jpeg|svg|gif)$/,
 	new CacheFirst({
-		cacheName: "static-cache",
+		cacheName: "image-cache",
 		plugins: [
 			new CacheableResponsePlugin({ statuses: [0, 200] }),
 			new ExpirationPlugin({
-				// 对资源缓存 1 天
-				maxAgeSeconds: 1 * 24 * 60 * 60,
+				// 对资源缓存 7 天
+				maxAgeSeconds: 7 * 24 * 60 * 60,
+				// 匹配该策略的最多缓存 100 条
+				maxEntries: 100
+			})
+		]
+	})
+);
+
+registerRoute(
+	/^https:\/\/*\.(?:html|css|js|json)$/,
+	new CacheFirst({
+		cacheName: "cdn-static-cache",
+		plugins: [
+			new CacheableResponsePlugin({ statuses: [0, 200] }),
+			new ExpirationPlugin({
+				// 对资源缓存 7 天
+				maxAgeSeconds: 7 * 24 * 60 * 60,
 				// 匹配该策略最多缓存 100 条
 				maxEntries: 100
 			})
@@ -64,7 +79,7 @@ registerRoute(
 	})
 );
 registerRoute(
-	/crates$/,
+	/^https:\/\/play.rust-lang.org/,
 	new CacheFirst({
 		cacheName: "crates-cache",
 		plugins: [
