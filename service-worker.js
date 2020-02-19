@@ -9,9 +9,9 @@ if (workbox) {
 }
 const { strategies } = workbox;
 const { registerRoute } = workbox.routing;
-const { CacheFirst } = workbox.strategies;
-const { CacheableResponse } = workbox.cacheableResponse;
-const {ExpirationPlugin} = workbox.expiration;
+const { CacheFirst, StaleWhileRevalidate } = workbox.strategies;
+const { CacheableResponsePlugin } = workbox.cacheableResponse;
+const { ExpirationPlugin } = workbox.expiration;
 
 // This will trigger the importScripts() for workbox.strategies and its dependencies:
 self.addEventListener("fetch", event => {
@@ -22,13 +22,13 @@ self.addEventListener("fetch", event => {
 	}
 	if (event.request.url.endsWith(".js")) {
 		// Using the previously-initialized strategies will work as expected.
-		const cacheFirst = new strategies.CacheFirst();
-		event.respondWith(cacheFirst.handle({ request: event.request }));
+		const StaleWhileRevalidate = new strategies.StaleWhileRevalidate();
+		event.respondWith(StaleWhileRevalidate.handle({ request: event.request }));
 	}
 	if (event.request.url.endsWith(".css")) {
 		// Using the previously-initialized strategies will work as expected.
-		const cacheFirst = new strategies.CacheFirst();
-		event.respondWith(cacheFirst.handle({ request: event.request }));
+		const StaleWhileRevalidate = new strategies.StaleWhileRevalidate();
+		event.respondWith(StaleWhileRevalidate.handle({ request: event.request }));
 	}
 });
 
@@ -37,11 +37,11 @@ registerRoute(
 	new CacheFirst({
 		cacheName: "image-cache",
 		plugins: [
-			new CacheableResponse({ statuses: [0, 200] }),
+			new CacheableResponsePlugin({ statuses: [0, 200] }),
 			new ExpirationPlugin({
-				// 对图片资源缓存 1 星期
+				// 对资源缓存 7 天
 				maxAgeSeconds: 7 * 24 * 60 * 60,
-				// 匹配该策略的图片最多缓存 10 张
+				// 匹配该策略的最多缓存 100 条
 				maxEntries: 100
 			})
 		]
@@ -49,30 +49,30 @@ registerRoute(
 );
 
 registerRoute(
-	/\.css$/,
+	/\.(?:html|css|js|json)$/,
 	new CacheFirst({
-		cacheName: "image-cache",
+		cacheName: "static-cache",
 		plugins: [
-			new CacheableResponse({ statuses: [0, 200] }),
+			new CacheableResponsePlugin({ statuses: [0, 200] }),
 			new ExpirationPlugin({
 				// 对资源缓存 1 天
 				maxAgeSeconds: 1 * 24 * 60 * 60,
-				// 匹配该策略最多缓存 10 条
+				// 匹配该策略最多缓存 100 条
 				maxEntries: 100
 			})
 		]
 	})
 );
 registerRoute(
-	/\.html$/,
+	/crates$/,
 	new CacheFirst({
-		cacheName: "html-cache",
+		cacheName: "crates-cache",
 		plugins: [
-			new CacheableResponse({ statuses: [0, 200] }),
+			new CacheableResponsePlugin({ statuses: [0, 200] }),
 			new ExpirationPlugin({
 				// 对资源缓存 1 天
 				maxAgeSeconds: 1 * 24 * 60 * 60,
-				// 匹配该策略最多缓存 10 条
+				// 匹配该策略最多缓存 100 条
 				maxEntries: 100
 			})
 		]
@@ -80,9 +80,17 @@ registerRoute(
 );
 
 registerRoute(
-	/^https:\/\/cdn.staticfile.org\*.min.*$/,
+	/^https:\/\/cdn.*/,
 	new CacheFirst({
 		cacheName: "CDN-cache",
-		plugins: [new CacheableResponse({ statuses: [0, 200] })]
+		plugins: [
+			new CacheableResponsePlugin({ statuses: [0, 200] }),
+			new ExpirationPlugin({
+				// 对资源缓存 7 天
+				maxAgeSeconds: 7 * 24 * 60 * 60,
+				// 匹配该策略最多缓存 100 条
+				maxEntries: 100
+			})
+		]
 	})
 );
