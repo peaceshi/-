@@ -10,7 +10,7 @@ p,
 li {
 	line-height: 1.5em;
 }
-li.expanded{
+li.expanded {
 	line-height: 2.2em;
 }
 code {
@@ -30,8 +30,8 @@ pre.mermaid {
 	background-color: #fdfbf5;
 	background-image: linear-gradient(transparent 98%, rgb(204, 204, 204) 98%),
 		linear-gradient(to right, transparent 98%, rgb(204, 204, 204) 98%);
-	background-size: 30px 30px;
-	background-position: 10px 10px;
+	background-size: 2em 2em;
+	background-position: 1em 1em;
 }
 svg {
 	margin-inline-start: auto;
@@ -40,9 +40,9 @@ svg {
 	width: 100%;
 }
 @font-face {
-    font-family: 'FontAwesome';
-    src: url('https://cdn.staticfile.org/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0&display=swap');
-    font-weight: normal;
-    font-style: normal;
-    font-display:swap
+	font-family: "FontAwesome";
+	src: url("https://cdn.staticfile.org/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0&display=swap");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
 }
