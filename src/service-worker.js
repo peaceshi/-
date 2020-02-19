@@ -65,17 +65,8 @@ registerRoute(
 
 registerRoute(
 	/^https:\/\/*\.(?:html|css|js|json)$/,
-	new CacheFirst({
-		cacheName: "cdn-static-cache",
-		plugins: [
-			new CacheableResponsePlugin({ statuses: [0, 200] }),
-			new ExpirationPlugin({
-				// 对资源缓存 7 天
-				maxAgeSeconds: 7 * 24 * 60 * 60,
-				// 匹配该策略最多缓存 100 条
-				maxEntries: 100
-			})
-		]
+	new StaleWhileRevalidate({
+		cacheName: "cdn-static-cache"
 	})
 );
 registerRoute(
@@ -96,16 +87,7 @@ registerRoute(
 
 registerRoute(
 	/^https:\/\/cdn.*/,
-	new CacheFirst({
-		cacheName: "CDN-cache",
-		plugins: [
-			new CacheableResponsePlugin({ statuses: [0, 200] }),
-			new ExpirationPlugin({
-				// 对资源缓存 7 天
-				maxAgeSeconds: 7 * 24 * 60 * 60,
-				// 匹配该策略最多缓存 100 条
-				maxEntries: 100
-			})
-		]
+	new StaleWhileRevalidate({
+		cacheName: "CDN-cache"
 	})
 );
