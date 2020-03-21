@@ -10,8 +10,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "release": "node file.js release",
-    "debug": "node file.js && mdbook clean && mdbook serve"
+    "release": "node --experimental-modules file.js release",
+    "debug": "node --experimental-modules file.js && mdbook clean && mdbook serve"
   },
   "repository": {
     "type": "git",
