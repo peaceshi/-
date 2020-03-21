@@ -11,6 +11,15 @@ function patchImgElementTag() {
 		}
 	}
 }
+let swPath = "/GameProgrammingPatterns/service-worker.js";
+let swScope = "/GameProgrammingPatterns/";
+if (
+	location.hostname === "localhost" || location.hostname === "127.0.0.1"
+) {
+	console.log("localhost mode");
+	swPath = "service-worker.js";
+	swScope = "/";
+}
 //https://lavas-project.github.io/pwa-book
 function registServiceWorker() {
 	// Check that service workers are supported
@@ -23,8 +32,8 @@ function registServiceWorker() {
 				}
 				// 注册 Service Worker
 				navigator.serviceWorker
-					.register("/GameProgrammingPatterns/service-worker.js", {
-						scope: "/GameProgrammingPatterns/"
+					.register(swPath, {
+						scope: swScope
 					})
 					.then(
 						registration => {

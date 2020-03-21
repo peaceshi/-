@@ -1,0 +1,26 @@
+{
+  "name": "gameprogrammingpatterns",
+  "version": "1.0.0",
+  "description": "",
+  "main": "file.js",
+  "type": "module",
+  "dependencies": {
+    "@types/node": "^13.9.2",
+    "replace-in-file": "^5.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "release": "node file.js release",
+    "debug": "node file.js && mdbook clean && mdbook serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peaceshi/GameProgrammingPatterns.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/peaceshi/GameProgrammingPatterns/issues"
+  },
+  "homepage": "https://github.com/peaceshi/GameProgrammingPatterns#readme"
+}
