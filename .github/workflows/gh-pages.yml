@@ -11,6 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-node@master
+        with:
+          node-version: '13.x'
       - name: Setup CDN 
         run: |
           npm install

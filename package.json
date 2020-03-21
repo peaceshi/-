@@ -2,16 +2,15 @@
   "name": "gameprogrammingpatterns",
   "version": "1.0.0",
   "description": "",
-  "main": "file.js",
+  "main": "file.mjs",
   "type": "module",
   "dependencies": {
     "@types/node": "^13.9.2",
     "replace-in-file": "^5.0.2"
   },
-  "devDependencies": {},
   "scripts": {
-    "release": "node --experimental-modules file.js release",
-    "debug": "node --experimental-modules file.js && mdbook clean && mdbook serve"
+    "release": "node file.mjs release",
+    "debug": "node file.mjs && mdbook clean && mdbook serve"
   },
   "repository": {
     "type": "git",
